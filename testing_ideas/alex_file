@@ -1,0 +1,65 @@
+# Constants
+DISTANCE_SYDNEY_MELBOURNE = 877  # km
+
+class Package:
+    starting_location = "Sydney"
+    ending_location = "Melbourne"
+    Unique_ID = 5
+    weight = 10000
+    customer_information = "xxx"
+
+class Truck:
+    unique_id = 1009
+    end_location = Package.ending_location
+    range = 8000
+    weight_capacity = 42000  # Kg
+    packages = []
+
+    def add_packages(self, package):
+        self.packages.append(package)
+
+Class Sydney:
+     package_storage = []
+     Scania_garage = []
+     Man_garage = []
+     Actros_garage = []
+
+
+Class Melbourne:
+      package_storage = []
+      package_storage = []
+      Scania_garage = []
+      Man_garage = []
+      Actros_garage = []
+
+def calculate_delivery_time(truck, route):
+    # calculate how much time it will take to deliver
+    pass
+
+def calculate_return_time(truck, route):
+    # calculate how much time it will take to come back
+    pass
+
+
+
+# Example usage:
+Scania_truck = Truck()
+if len(Sydney.Scania_garage) != 0:
+    if  package_weight_limit >= Scania_truck.weight_capacity and Scania_truck.max_range <= DISTANCE_SYDNEY_MELBOURNE:
+        Scania_truck.add_packages(Sydney.package_storage)
+        Melbourne.Scania_garage.append(Scania_truck)
+        calculate_delivery_time(Scania_truck, Melbourne)
+        Melbourne.Scania_garage.remove(Scania_truck)
+        calculate_return_time(Scania_truck, Sydney)
+        Sydney.Scania_garage.append(Scania_truck)
+else:
+    if len(Sydney.Scania_garage) == 0:
+        total_time = calculate_return_time(previous_truck, Sydney) + calculate_delivery_time(new_truck, Sydney)
+        if total_time <= customer_acceptable_time:
+            # proceed with add/remove methods
+            pass
+
+
+
+
+

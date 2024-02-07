@@ -1,4 +1,4 @@
-class Locations:
+class Location:
 
     CITY = {"sydney": 0, "melbourne": 1, "adelaide": 2, "alice springs": 3, "brisbane": 4, "darwin": 5, "perth": 6}
 
@@ -16,4 +16,4 @@ class Locations:
     def get_kilometers(start_loc, end_loc):
         start = start_loc.lower()
         end = end_loc.lower()
-        return Locations.DISTANCE[Locations.CITY[start]][Locations.CITY[end]]
+        return Location.DISTANCE[Location.CITY[start]][Location.CITY[end]]

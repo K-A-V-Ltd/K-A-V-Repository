@@ -6,8 +6,8 @@ class Employee:
         self.username = username
         self.password = password
         self.role = role
-        self.is_manager = True if self.role == "Manager" else False
-        self.is_supervisor = True if self.role == "Supervisor" else False
+        self._is_manager = True if self.role == "Manager" else False
+        self._is_supervisor = True if self.role == "Supervisor" else False
 
     @property
     def username(self):
@@ -36,3 +36,11 @@ class Employee:
             self._password = value
         else:
             raise ValueError('Password must be between 5 and 30 characters long!')
+
+    @property
+    def is_manager(self):
+        return self._is_manager
+
+    @property
+    def is_supervisor(self):
+        return self._is_supervisor

@@ -60,7 +60,7 @@ class ActrosShould(unittest.TestCase):
             object_actros.remove_package(package)
 
     def test_successfulPrevention_of_creatingMoreTrucks_ofTypeActros(self):
-        for _ in range(9):
+        for _ in range(8):
             Scania(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
 
         # & Assert

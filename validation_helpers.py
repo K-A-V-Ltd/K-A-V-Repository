@@ -10,7 +10,8 @@ def valid_email(value):
     """
     This function takes value as a parameter and returns True if the domain is in the of acceptable domains.
     """
-    if "@gmail.com" in value or "@yahoo.com" in value and len(value) >= 13:
+
+    if ("@gmail.com" in value or "@yahoo.com" in value) and len(value) >= 12:
         return True
 
 

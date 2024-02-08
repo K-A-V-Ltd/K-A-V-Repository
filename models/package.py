@@ -7,11 +7,14 @@ from validation_helpers import valid_email, valid_phone, valid_first_name, valid
 
 
 class Package:
+    PACKAGE_ID = 1
 
     def __init__(self, starting_location: str, ending_location: str, package_weight: int,
                  first_name: str, last_name: str, phone_number: int, email: str):
         self._starting_location = starting_location
         self._ending_location = ending_location
+        self.id = Package.PACKAGE_ID
+        Package.PACKAGE_ID += 1
 
         if not valid_package(package_weight):
             raise ValueError("Package must be above 0 KG")
@@ -72,3 +75,4 @@ class Package:
                 f"Sent to: {self._ending_location}\n"
                 f"Sent by: {self._first_name} {self._last_name}\n"
                 f"Sender contact information: {self._email} Phone number: {self._phone_number}\n")
+

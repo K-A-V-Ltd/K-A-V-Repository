@@ -16,6 +16,7 @@ class Vehicle:
         self._ending_location = ending_location
         self._packages = []
 
+
     @property
     def starting_location(self):
         return self._starting_location

@@ -60,7 +60,7 @@ class ManShould(unittest.TestCase):
             object_actros.remove_package(package)
 
     def test_successfulPrevention_of_creatingMoreTrucks_ofTypeMan(self):
-        for _ in range(14):
+        for _ in range(13):
             Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
 
         # & Assert

@@ -33,7 +33,7 @@ class PackageShould(unittest.TestCase):
         with self.assertRaises(ValueError):
             Package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
                     td.VALID_LAST_NAME,
-                    td.VALID_PHONE_NUMBER, "@gmail.com", )
+                    td.VALID_PHONE_NUMBER, "@gmail.com")
 
     def test_init_raiseError_PackageInvalid(self):
         with self.assertRaises(ValueError):

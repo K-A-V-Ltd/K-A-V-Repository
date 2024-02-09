@@ -3,7 +3,7 @@
 # End Location
 # Weight
 # Customer Contact Information
-from validation_helpers import valid_email, valid_phone, valid_first_name, valid_last_name, valid_package
+from commands.validation_helpers import valid_email, valid_phone, valid_first_name, valid_last_name, valid_package
 
 
 class Package:

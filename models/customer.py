@@ -1,2 +1,0 @@
-# Personal Information
-# str method

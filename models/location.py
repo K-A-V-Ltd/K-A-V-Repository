@@ -1,6 +1,15 @@
-# Name
-# Packages to unload []
-# Packages to load []
-# List of trucks on stand by []
-# List of trucks stopping to unload []
-# Add package/truck methods
+from enum import Enum
+
+
+class Location(Enum):
+    SYD = "Sydney"
+    MEL = "Melbourne"
+    ADL = "Adelaide"
+    ASP = "Alice Springs"
+    BRI = "Brisbane"
+    DAR = "Darwin"
+    PER = "Perth"
+
+
+def __str__(self):
+    return self.value

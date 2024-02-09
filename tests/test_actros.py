@@ -6,11 +6,13 @@ from models.package import Package
 
 
 class ActrosShould(unittest.TestCase):
+
     def test_validDataTypes(self):
         # Arrange
         object_actros = Actros(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
 
         # Act & Assert
+
         self.assertIsInstance(object_actros.ending_location, str)
         self.assertIsInstance(object_actros.starting_location, str)
         self.assertIsInstance(object_actros.packages, list)

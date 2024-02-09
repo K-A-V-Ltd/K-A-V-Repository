@@ -14,11 +14,3 @@ class Scania(Vehicle):
         else:
             Scania.SCANIA_ID_NUMBER += 1
 
-
-
-
-
-
-
-
-

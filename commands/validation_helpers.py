@@ -17,51 +17,42 @@ def try_parse_float(s):
     try:
         return float(s)
     except:
-        raise ValueError("Invalid value for price. Should be a number.")
+        raise ValueError("Invalid value for weight. Should be a number.")
 
 
 def try_parse_int(s):
     try:
         return int(s)
     except:
-        raise ValueError("Invalid value for mililitres. Should be an integer.")
-
-def valid_phone(value):
-    """
-    This function takes value as a parameter and returns True if it's length is acceptable.
-    """
-    if len(str(value)) >= 6:
-        return True
+        raise ValueError("Invalid value for []. Should be an integer.")  # to be updated
 
 
-def valid_email(value):
-    """
-    This function takes value as a parameter and returns True if the domain is in the of acceptable domains.
-    """
-
-    if ("@gmail.com" in value or "@yahoo.com" in value) and len(value) >= 12:
-        return True
+# ---------VALIDATIONS FOR CLASS PACKAGE------------
 
 
-def valid_first_name(value):
-    """
-    This function takes value as a parameter and returns True if the name contains at least 1 letter.
-    """
-    if len(value) >= 1:
-        return True
+def ensure_valid_weight(value):
+    if value <= 0.5:
+        raise ValueError("Weight should be above 0.5kg")
 
 
-def valid_last_name(value):
-    """
-    This function takes value as a parameter and returns True if the name contains at least 1 letter.
-    """
-    if len(value) >= 1:
-        return True
+def ensure_valid_phone(value):
+
+    if len(str(value)) < 10:
+        raise ValueError("Phone number should be 10 digits long.")
 
 
-def valid_package(value):
-    """
-    This function takes value as a parameter and returns True if it's above 0.
-    """
-    if 1 <= value:
-        return True
+def ensure_valid_email(value):
+
+    if not ("@gmail.com" in value or "@yahoo.com" in value):
+        raise ValueError("Email should contain '@gmail.com' or '@yahoo.com'")
+
+
+def ensure_valid_first_name(value):
+    if not 2 <= len(value) <= 10:
+        raise ValueError("First name should be between 2 and 10 characters long.")
+
+
+def ensure_valid_last_name(value):
+
+    if not 2 <= len(value) <= 10:
+        raise ValueError("Last name should be between 2 and 10 characters long.")

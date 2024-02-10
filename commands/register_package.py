@@ -14,7 +14,7 @@ class RegisterPackageCommand(BaseCommand):
         models_factory: ModelsFactory,
     ):
         super().__init__(params, app_data)
-        validate_params_count(params, 4, "RegisterPackage")
+        validate_params_count(params, 7, "RegisterPackage")
         self._models_factory = models_factory
 
     @property
@@ -30,10 +30,13 @@ class RegisterPackageCommand(BaseCommand):
         ).value  # in order to access the value and test; remove later
         end_loc = Location(params[1]).value  # same as above
         weight = try_parse_float(params[2])
-        contact_info = params[3]
+        first_name = params[3]
+        last_name = params[4]
+        phone_number = params[5]
+        email = params[6]
 
         package = self.models_factory.create_package(
-            start_loc, end_loc, weight, contact_info
+            start_loc, end_loc, weight, first_name, last_name, phone_number, email
         )
         self.app_data.add_package(package)
 

@@ -37,7 +37,7 @@ def ensure_valid_weight(value):
 
 def ensure_valid_phone(value):
 
-    if len(str(value)) < 10:
+    if len(str(value)) != 10:
         raise ValueError("Phone number should be 10 digits long.")
 
 

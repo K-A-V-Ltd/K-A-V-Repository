@@ -1,6 +1,6 @@
 from models.package import Package
 from models.route import Route
-from models.location import Location
+from datetime import datetime
 
 
 class ModelsFactory:
@@ -10,12 +10,12 @@ class ModelsFactory:
 
     def create_package(
         self,
-        start_loc: Location,
-        end_loc: Location,
+        start_loc: str,
+        end_loc: str,
         weight: float,
         first_name: str,
         last_name: str,
-        phone_number,
+        phone_number: str,
         email: str,
     ):
         package_id = self._package_id
@@ -32,8 +32,8 @@ class ModelsFactory:
             email,
         )
 
-    def create_route(self, start_time, locations: list[Location]):
+    def create_route(self, departure_time: datetime, locations: list[str]):
         route_id = self._route_id
         self._route_id += 1
 
-        return Route(route_id, start_time, locations)
+        return Route(route_id, departure_time, locations)

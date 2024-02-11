@@ -12,7 +12,20 @@ class ApplicationData:
 
     def add_route(self, route: Route):
         self._routes.append(route)
-        
+
+    def find_suitable_route(self, start_location, end_location):
+        suitable_routes: list[Route] = []
+        for route in self._routes:
+            if route.is_valid_for_package(start_location, end_location):
+                suitable_routes.append(route)
+        return suitable_routes
+
+    def find_route_by_id(self, id: int):
+        for route in self._routes:
+            if route.id == id:
+                return route
+
+        return None
 
     def display_packs(self):
         for pack in self._packages:

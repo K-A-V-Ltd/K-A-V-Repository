@@ -1,7 +1,7 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
-from models.location import Location
+from models.locs_distance import Locations
 from commands.validation_helpers import try_parse_float, validate_params_count
 
 
@@ -22,13 +22,11 @@ class RegisterPackageCommand(BaseCommand):
         return self._models_factory
 
     def execute(self):
-        # star_loc, end_loc, weight, contact_info
+
         (*params,) = self.params
 
-        start_loc = Location(
-            params[0]
-        ).value  # in order to access the value and test; remove later
-        end_loc = Location(params[1]).value  # same as above
+        start_loc = Locations.is_valid_location(params[0])
+        end_loc = Locations.is_valid_location(params[1])
         weight = try_parse_float(params[2])
         first_name = params[3]
         last_name = params[4]

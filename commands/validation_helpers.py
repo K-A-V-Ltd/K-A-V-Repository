@@ -1,6 +1,8 @@
 # to be implemented
+from datetime import datetime
 from errors.invalid_params import InvalidParams
 from errors.invalid_minimum_params import InvalidMinimumParams
+from errors.invalid_time import InvalidTime
 
 
 def validate_params_count(params: list[str], count: int, cmd_name: str):
@@ -11,6 +13,14 @@ def validate_params_count(params: list[str], count: int, cmd_name: str):
 def validate_minimum_params_count(params: list[str], count: int, cmd_name: str):
     if len(params) < count:
         raise InvalidMinimumParams(cmd_name, count)
+
+
+def validate_time(departure_time: datetime):
+    if departure_time < datetime.now():
+        raise InvalidTime(departure_time)
+    else:
+        return departure_time
+    # departure_time.strftime("%b %d %H:%M") - this turns it into a string; use later on when outputing the result to the console
 
 
 def try_parse_float(s):
@@ -24,7 +34,7 @@ def try_parse_int(s):
     try:
         return int(s)
     except:
-        raise ValueError("Invalid value for []. Should be an integer.")  # to be updated
+        raise ValueError("Invalid value for mililitres. Should be an integer.")
 
 
 # ---------VALIDATIONS FOR CLASS PACKAGE------------
@@ -37,8 +47,10 @@ def ensure_valid_weight(value):
 
 def ensure_valid_phone(value):
 
-    if len(str(value)) != 10:
+    if len(value) != 10:
         raise ValueError("Phone number should be 10 digits long.")
+    if not value.isdigit():
+        raise ValueError("Phone number should contain only digits ")
 
 
 def ensure_valid_email(value):

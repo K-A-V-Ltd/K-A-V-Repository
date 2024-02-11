@@ -1,4 +1,4 @@
-from custom_errors import OwnedVehicles
+from errors.vehicles_limit import OwnedVehicles
 from models.vehicles.vehicle import Vehicle
 
 

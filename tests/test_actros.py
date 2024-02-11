@@ -1,6 +1,6 @@
 import unittest
 import test_data as td
-from custom_errors import OwnedVehicles
+from errors.vehicles_limit import OwnedVehicles
 from models.vehicles.actros import Actros
 from models.package import Package
 
@@ -20,7 +20,7 @@ class ActrosShould(unittest.TestCase):
     def test_addPackage_method(self):
         # Arrange
         object_actros = Actros(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-        package = Package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
                           td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Act
@@ -41,7 +41,7 @@ class ActrosShould(unittest.TestCase):
     def test_removePackage_method(self):
         # Arrange
         object_actros = Actros(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-        package = Package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
                           td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Act
@@ -54,7 +54,7 @@ class ActrosShould(unittest.TestCase):
     def test_removePackage_raisesError_ifNonExistent(self):
         # Arrange
         object_actros = Actros(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-        package = Package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
                           td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Act & Assert

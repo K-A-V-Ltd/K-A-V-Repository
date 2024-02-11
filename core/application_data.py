@@ -8,10 +8,16 @@ class ApplicationData:
         self._routes: list[Route] = []
 
     def add_package(self, package: Package):
-        self._packages.append(package)
+        if package != None:
+            self._packages.append(package)
+        else:
+            raise ValueError("You are trying append an empty package")
 
     def add_route(self, route: Route):
-        self._routes.append(route)
+        if route != None:
+            self._routes.append(route)
+        else:
+            raise ValueError("You are trying to append None as a route")
 
     def find_suitable_route(self, start_location, end_location):
         suitable_routes: list[Route] = []
@@ -30,6 +36,7 @@ class ApplicationData:
     def display_packs(self):
         for pack in self._packages:
             print(pack.weight)
+
 
     def display_routes(self):
         for route in self._routes:

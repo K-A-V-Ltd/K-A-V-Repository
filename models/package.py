@@ -1,3 +1,6 @@
+from fontTools.feaLib import location
+import tests.test_data as td
+
 from commands.validation_helpers import (
     ensure_valid_email,
     ensure_valid_phone,
@@ -14,10 +17,10 @@ class Package:
         id: int,
         start_loc: str,
         end_loc: str,
-        weight: int,
+        weight: float,
         first_name: str,
         last_name: str,
-        phone_number: int,
+        phone_number: str,
         email: str,
     ):
         self._id = id
@@ -69,3 +72,4 @@ class Package:
             f"Sent by: {self._first_name} {self._last_name}\n"
             f"Sender contact information: {self._email} Phone number: {self._phone_number}\n"
         )
+

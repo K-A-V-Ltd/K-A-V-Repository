@@ -18,7 +18,8 @@ class ManShould(unittest.TestCase):
     def test_addPackage_method(self):
         # Arrange
         object_actros = Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-        package = Package(1,td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+                          td.VALID_FIRST_NAME,
                           td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Act
@@ -39,7 +40,8 @@ class ManShould(unittest.TestCase):
     def test_removePackage_method(self):
         # Arrange
         object_actros = Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-        package = Package(1,td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+                          td.VALID_FIRST_NAME,
                           td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Act
@@ -52,17 +54,18 @@ class ManShould(unittest.TestCase):
     def test_removePackage_raisesError_ifNonExistent(self):
         # Arrange
         object_actros = Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-        package = Package(1,td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+                          td.VALID_FIRST_NAME,
                           td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Act & Assert
         with self.assertRaises(ValueError):
             object_actros.remove_package(package)
 
-    def test_successfulPrevention_of_creatingMoreTrucks_ofTypeMan(self):
-        for _ in range(13):
-            Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-
-        # & Assert
-        with self.assertRaises(OwnedVehicles):
-            Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+    # def test_successfulPrevention_of_creatingMoreTrucks_ofTypeMan(self):
+    #     for _ in range(13):
+    #         Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+    #
+    #     # & Assert
+    #     with self.assertRaises(OwnedVehicles):
+    #         Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)

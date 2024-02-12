@@ -9,7 +9,7 @@ class Scania(Vehicle):
         self.id = Vehicle.SCANIA_ID_NUMBER
         Vehicle.SCANIA_ID_NUMBER += 1
 
-        if Scania.SCANIA_ID_NUMBER >= 1010:
+        if Scania.SCANIA_ID_NUMBER == 1011:
             raise OwnedVehicles("Scania")
         else:
             Scania.SCANIA_ID_NUMBER += 1

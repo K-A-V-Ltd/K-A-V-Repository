@@ -20,9 +20,17 @@ class Vehicle:
     def starting_location(self):
         return self._starting_location
 
+    @starting_location.setter
+    def starting_location(self, value):
+        self._starting_location = value
+
     @property
     def ending_location(self):
         return self._ending_location
+
+    @ending_location.setter
+    def ending_location(self, value):
+        self._ending_location = value
 
     @property
     def packages(self):

@@ -3,26 +3,16 @@ class Vehicle:
     Man_ID_NUMBER = 1011
     ACTROS_ID_NUMBER = 1026
 
-    SCANIA_MAX_TRAVEL_RANGE = 8000  # Km
-    Man_MAX_TRAVEL_RANGE = 10000  # Km
-    ACTROS_MAX_TRAVEL_RANGE = 13000  # Km
+    def __init__(self):
 
-    SCANIA_MAX_WEIGHT_CAPACITY = 42000  # Kg
-    MAN_MAX_WEIGHT_CAPACITY = 37000  # Kg
-    ACTROS_MAX_WEIGHT_CAPACITY = 26000  # Kg
-
-    def __init__(self, starting_location: str, ending_location: str):
-        self._starting_location = starting_location
-        self._ending_location = ending_location
         self._packages = []
+        self.weight = None
+        self.range = None
 
     @property
-    def starting_location(self):
-        return self._starting_location
-
-    @property
-    def ending_location(self):
-        return self._ending_location
+    def unused_capacity(self):
+        used_capacity = sum([x.weight for x in self._packages])
+        return self.weight - used_capacity
 
     @property
     def packages(self):

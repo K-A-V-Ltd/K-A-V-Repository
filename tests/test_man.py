@@ -8,17 +8,16 @@ from models.package import Package
 class ManShould(unittest.TestCase):
     def test_validDataTypes(self):
         # Arrange
-        object_actros = Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+        object_actros = Man()
 
         # Act & Assert
-        self.assertIsInstance(object_actros.ending_location, str)
-        self.assertIsInstance(object_actros.starting_location, str)
         self.assertIsInstance(object_actros.packages, list)
 
     def test_addPackage_method(self):
         # Arrange
-        object_actros = Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-        package = Package(1,td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
+        object_actros = Man()
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+                          td.VALID_FIRST_NAME,
                           td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Act
@@ -29,7 +28,7 @@ class ManShould(unittest.TestCase):
 
     def test_addPackage_raisesError_ifNone(self):
         # Arrange
-        object_actros = Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+        object_actros = Man()
         package = None
 
         # Act & Assert
@@ -38,8 +37,9 @@ class ManShould(unittest.TestCase):
 
     def test_removePackage_method(self):
         # Arrange
-        object_actros = Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-        package = Package(1,td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
+        object_actros = Man()
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+                          td.VALID_FIRST_NAME,
                           td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Act
@@ -51,18 +51,21 @@ class ManShould(unittest.TestCase):
 
     def test_removePackage_raisesError_ifNonExistent(self):
         # Arrange
-        object_actros = Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-        package = Package(1,td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
+        object_actros = Man()
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+                          td.VALID_FIRST_NAME,
                           td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Act & Assert
         with self.assertRaises(ValueError):
             object_actros.remove_package(package)
 
-    def test_successfulPrevention_of_creatingMoreTrucks_ofTypeMan(self):
-        for _ in range(13):
-            Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+    def test_remainingCapacityReturnsSuccessfully(self):
+        object_actros = Man()
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+                          td.VALID_FIRST_NAME, td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
-        # & Assert
-        with self.assertRaises(OwnedVehicles):
-            Man(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+        object_actros.add_package(package)
+        result = object_actros.weight - package.weight
+
+        self.assertEqual(object_actros.unused_capacity, result)

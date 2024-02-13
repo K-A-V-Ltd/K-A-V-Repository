@@ -31,6 +31,9 @@ class Package:
         self._last_name = ensure_valid_last_name(last_name)
         self._phone_number = ensure_valid_phone(phone_number)
         self._email = ensure_valid_email(email)
+        # self._is_delivered_status = None
+        # route
+
 
     @property
     def id(self):

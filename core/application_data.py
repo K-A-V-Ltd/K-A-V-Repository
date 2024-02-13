@@ -1,11 +1,14 @@
 from models.package import Package
 from models.route import Route
+from models.vehicles.trucks_creation import Garage
 
 
 class ApplicationData:
     def __init__(self):
         self._packages: list[Package] = []
         self._routes: list[Route] = []
+        self._garage = Garage #The approach might be changed.
+
 
     def add_package(self, package: Package):
         if package != None:

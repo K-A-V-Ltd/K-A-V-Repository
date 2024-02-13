@@ -7,16 +7,14 @@ from models.package import Package
 class ActrosShould(unittest.TestCase):
     def test_validDataTypes(self):
         # Arrange
-        object_actros = Scania(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+        object_actros = Scania()
 
         # Act & Assert
-        self.assertIsInstance(object_actros.ending_location, str)
-        self.assertIsInstance(object_actros.starting_location, str)
         self.assertIsInstance(object_actros.packages, list)
 
     def test_addPackage_method(self):
         # Arrange
-        object_actros = Scania(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+        object_actros = Scania()
         package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
                           td.VALID_FIRST_NAME,
                           td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
@@ -29,7 +27,7 @@ class ActrosShould(unittest.TestCase):
 
     def test_addPackage_raisesError_ifNone(self):
         # Arrange
-        object_actros = Scania(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+        object_actros = Scania()
         package = None
 
         # Act & Assert
@@ -38,7 +36,7 @@ class ActrosShould(unittest.TestCase):
 
     def test_removePackage_method(self):
         # Arrange
-        object_actros = Scania(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+        object_actros = Scania()
         package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
                           td.VALID_FIRST_NAME, td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
@@ -51,7 +49,7 @@ class ActrosShould(unittest.TestCase):
 
     def test_removePackage_raisesError_ifNonExistent(self):
         # Arrange
-        object_actros = Scania(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+        object_actros = Scania()
         package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
                           td.VALID_FIRST_NAME, td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
@@ -59,10 +57,12 @@ class ActrosShould(unittest.TestCase):
         with self.assertRaises(ValueError):
             object_actros.remove_package(package)
 
-    # def test_successfulPrevention_of_creatingMoreTrucks_ofTypeActros(self):
-    #     for _ in range(8):
-    #         Scania(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
-    #
-    #     # & Assert
-    #     with self.assertRaises(OwnedVehicles):
-    #         Scania(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION)
+    def test_remainingCapacityReturnsSuccessfully(self):
+        object_actros = Scania()
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+                          td.VALID_FIRST_NAME, td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
+
+        object_actros.add_package(package)
+        result = object_actros.weight - package.weight
+
+        self.assertEqual(object_actros.unused_capacity, result)

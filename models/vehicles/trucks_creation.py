@@ -6,18 +6,16 @@ Scania_trucks = []
 Man_truck = []
 Actros_trucks = []
 
-for x in range(9):
-    truck = Scania("default", "default")
+for x in range(10):
+    truck = Scania()
     Scania_trucks.append(truck)
 
-for x in range(14):
-    truck = Man("default", "default")
+for x in range(15):
+    truck = Man()
     Man_truck.append(truck)
 
-for x in range(14):
-    truck = Actros("default", "default")
+for x in range(15):
+    truck = Actros()
     Actros_trucks.append(truck)
 
-truck1 = Scania_trucks[0]
-truck1.ending_location = "Sydney"
-truck1.starting_location = "Perth"
+Garage = [Scania_trucks, Man_truck, Actros_trucks]

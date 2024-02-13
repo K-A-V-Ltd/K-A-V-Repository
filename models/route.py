@@ -1,14 +1,15 @@
 from models.locs_distance import Locations
+from models.location import Location
 from datetime import datetime, timedelta
 
 
 class Route:
-    def __init__(self, id: int, departure_time: datetime, locations: list[str]):
+    def __init__(self, id: int, departure_time: datetime, locations: list[Location]):
         self._id = id
         self._departure_time = departure_time
-        self._locations = locations
-        self._trucks = []
-        self.eta_list: list[datetime] = self._calculate_eta()
+        self._locations: list[Location] = locations
+        # self._truck = vehicle object
+        self.eta_list: list[datetime] = self._calculate_eta()  # modify it !!!
 
     @property
     def id(self):

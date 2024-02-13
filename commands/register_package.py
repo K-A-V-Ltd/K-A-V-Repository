@@ -38,4 +38,4 @@ class RegisterPackageCommand(BaseCommand):
         )
         self.app_data.add_package(package)
 
-        return f"Package ID:{package.id} and staring location {start_loc} registered!"
+        return f"Package #{package.id} successfully registered."

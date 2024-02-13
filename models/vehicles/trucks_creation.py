@@ -1,6 +1,8 @@
-from actros import Actros
-from man import Man
-from scania import Scania
+from models.vehicles.actros import Actros
+from models.vehicles.man import Man
+from models.vehicles.scania import Scania
+
+# can't we have just one list Garage, instead of nested lists for easier access
 
 Scania_trucks = []
 Man_truck = []

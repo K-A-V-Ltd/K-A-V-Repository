@@ -1,4 +1,3 @@
-from fontTools.feaLib import location
 import tests.test_data as td
 
 from commands.validation_helpers import (
@@ -8,6 +7,7 @@ from commands.validation_helpers import (
     ensure_valid_last_name,
     ensure_valid_weight,
 )
+from models.route import Route
 
 
 class Package:
@@ -31,9 +31,9 @@ class Package:
         self._last_name = ensure_valid_last_name(last_name)
         self._phone_number = ensure_valid_phone(phone_number)
         self._email = ensure_valid_email(email)
+        self.route: Route = None
+        self._eta = None  # has to be implemented; estimated arrival time
         # self._is_delivered_status = None
-        # route
-
 
     @property
     def id(self):
@@ -67,6 +67,10 @@ class Package:
     def email(self):
         return self._email
 
+    @property
+    def eta(self):
+        pass
+
     def __str__(self):
         return (
             f"Package with weight: {self._weight}\n"
@@ -75,4 +79,3 @@ class Package:
             f"Sent by: {self._first_name} {self._last_name}\n"
             f"Sender contact information: {self._email} Phone number: {self._phone_number}\n"
         )
-

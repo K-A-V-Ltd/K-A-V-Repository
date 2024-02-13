@@ -7,7 +7,7 @@ class Locations:
         "sydney": 0,
         "melbourne": 1,
         "adelaide": 2,
-        "alice springs": 3,
+        "alicesprings": 3,
         "brisbane": 4,
         "darwin": 5,
         "perth": 6,
@@ -24,13 +24,13 @@ class Locations:
     ]
 
     @staticmethod
-    def is_valid_location(location: str) -> None:
+    def is_valid_location(location: str) -> str:
         if location.lower() not in Locations.CITY:
             raise InvalidLocation(location)
-        return location.lower()
+        return location.capitalize()
 
     @staticmethod
-    def get_distance(start_loc, end_loc):
-        start = start_loc.lower()  # ! can be removed, considering the method above
+    def get_distance(start_loc: str, end_loc: str) -> int:
+        start = start_loc.lower()
         end = end_loc.lower()
         return Locations.DISTANCE[Locations.CITY[start]][Locations.CITY[end]]

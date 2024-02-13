@@ -13,6 +13,6 @@ class Engine:
                 break
 
             command = self._command_factory.create(input_line)
-            output.append(command.execute())
+            print(command.execute())
 
         print("\n".join(output))

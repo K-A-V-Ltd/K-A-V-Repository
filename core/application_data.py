@@ -1,39 +1,46 @@
+from __future__ import annotations
 from models.package import Package
 from models.route import Route
 from models.vehicles.trucks_creation import Garage
 
 
+
 class ApplicationData:
     def __init__(self):
-        self._unassigned_packages: list[Package] = []
-        self._routes: list[Route] = []
+        self.unassigned_packages: list[Package] = (
+            []
+        )  # packages are stashed here after registration
+        self.all_packages: list[Package] = (
+            []
+        )  # they are stashed also here for easier access to their info, might remove later and use a dictionary
+        self.routes: list[Route] = []
         self._garage = Garage  # The approach might be changed.
 
     def add_package(self, package: Package):
-        # ???
-        if package != None:
-            self._unassigned_packages.append(package)
-        else:
-            raise ValueError("You are trying append an empty package")
+        self.unassigned_packages.append(package)
+        self.all_packages.append(package)
 
     def add_route(self, route: Route):
-        # ???
-        if route != None:
-            self._routes.append(route)
-        else:
-            raise ValueError("You are trying to append None as a route")
+        self.routes.append(route)
 
     def find_suitable_route(self, start_location, end_location):
         suitable_routes: list[Route] = []
-        for route in self._routes:
+        for route in self.routes:
             if route.is_valid_for_package(start_location, end_location):
                 suitable_routes.append(route)
         return suitable_routes
 
     def find_route_by_id(self, id: int):
-        for route in self._routes:
+        for route in self.routes:
             if route.id == id:
                 return route
+
+        return None
+
+    def find_package_by_id(self, id: int):
+        for package in self.all_packages:
+            if package.id == id:
+                return package
 
         return None
 

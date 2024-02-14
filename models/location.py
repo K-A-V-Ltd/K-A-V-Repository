@@ -1,11 +1,13 @@
-from models.package import Package
+from __future__ import annotations
+
+# from models.package import Package
 
 
 class Location:
     def __init__(self, name):
         self._name = name
         self.weight = 0
-        self.packages: list[Package] = []
+        # self.packages: list[Package] = []
         self.time = None  # have to implement eta
 
     @property
@@ -16,10 +18,10 @@ class Location:
     def weight(self):
         return self._weight
 
-    def add_package(self, package: Package):
+    def add_package(self, package):
         self.packages.append(package)
         self._weight += package.weight
 
-    def remove_package(self, package: Package):
+    def remove_package(self, package):
         self.packages.remove(package)
         self._weight -= package.weight

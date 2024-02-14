@@ -8,6 +8,7 @@ class Vehicle:
         self._packages = []
         self.weight = None
         self.range = None
+        # add route: route object
 
     @property
     def unused_capacity(self):
@@ -36,4 +37,6 @@ class Vehicle:
         if value in self._packages:
             self._packages.remove(value)
         else:
-            raise ValueError("We apologise, but we possess no such package in our storage.")
+            raise ValueError(
+                "We apologise, but we possess no such package in our storage."
+            )

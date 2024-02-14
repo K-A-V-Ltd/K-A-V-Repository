@@ -2,6 +2,8 @@ from commands.register_package import RegisterPackageCommand
 from commands.create_route import CreateRouteCommand
 from commands.search_route import SearchRouteCommand
 from commands.view_unassigned import ViewUnassignedPackages
+from commands.view_pack_info import ViewPackageInfo
+from commands.assign_package import AssignPackage
 from core.models_factory import ModelsFactory
 from errors.invalid_command import InvalidCommand
 
@@ -22,5 +24,9 @@ class CommandFactory:
             return SearchRouteCommand(params, self._app_data)
         if cmd.lower() == "viewunassignedpackages":
             return ViewUnassignedPackages(params, self._app_data)
+        if cmd.lower() == "viewpackageinfo":
+            return ViewPackageInfo(params, self._app_data)
+        if cmd.lower() == "assignpackage":
+            return AssignPackage(params, self._app_data)
 
         raise InvalidCommand(cmd)

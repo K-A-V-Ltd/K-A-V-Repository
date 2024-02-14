@@ -16,7 +16,7 @@ class SearchRouteCommand(BaseCommand):
         validate_params_count(params, 2, "SearchRoute")
 
     def execute(self):
-        start_loc, end_loc = self._params
+        start_loc, end_loc = self.params
 
         start_loc = Locations.is_valid_location(start_loc)
         end_loc = Locations.is_valid_location(end_loc)

@@ -1,3 +1,4 @@
+from __future__ import annotations
 from core.application_data import ApplicationData
 from core.command_factory import CommandFactory
 from core.engine import Engine
@@ -10,11 +11,13 @@ engine = Engine(cmd_factory)
 engine.start()
 
 """
---------input example---------
+-------- input examples ---------
 viewunassignedPackages
+viewPackageInfo 2
 registerPackage Sydney Brisbane 23.5 John Dutton 0386574856 john.dutton@gmail.com
 registerPackage Perth Adelaide 53.5 John Dutton 0386574856 john.dutton@gmail.com
 viewunassignedPackages
+viewPackageInfo 2
 createRoute Mar 11 12:30 Sydney Brisbane Adelaide Perth
 createRoute  Apr 1 11:30 Brisbane Perth Sydney
 createRoute Apr 1 17:23 Adelaide Brisbane Sydney

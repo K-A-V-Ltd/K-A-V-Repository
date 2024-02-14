@@ -35,7 +35,7 @@ def try_parse_int(s):
     try:
         return int(s)
     except:
-        raise ValueError("Invalid value for millilitres. Should be an integer.")
+        raise ValueError("Invalid value for ID. Should be an integer.")
 
 
 # ---------VALIDATIONS FOR CLASS PACKAGE------------
@@ -55,6 +55,9 @@ def ensure_valid_phone(value):
         raise ValueError("Phone number should contain only digits ")
 
     return value
+
+
+# add a length requirement as well
 
 
 def ensure_valid_email(value):

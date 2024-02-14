@@ -1,5 +1,7 @@
+from __future__ import annotations
 from models.locs_distance import Locations
 from models.location import Location
+from models.package import Package
 from datetime import datetime, timedelta
 
 
@@ -8,6 +10,7 @@ class Route:
         self._id = id
         self._departure_time = departure_time
         self._locations: list[Location] = locations
+        self.packages: list[Package] = []
         # self._truck = vehicle object
         self.eta_list: list[datetime] = self._calculate_eta()  # modify it !!!
 
@@ -16,16 +19,12 @@ class Route:
         return self._id
 
     @property
-    def start_time(self):
+    def departure_time(self):
         return self._departure_time
 
     @property
     def locations(self):
         return tuple(self._locations)
-
-    @property
-    def trucks(self):
-        return tuple(self._trucks)
 
     @property
     def total_distance(self):
@@ -71,6 +70,9 @@ class Route:
 
         return start_index < end_index
 
+    def add_package(self, package: Package):
+        self.packages.append(package)
+
     # finetune it
     def __str__(self):
         route_str = f"Route ID: {self.id}\n"
@@ -80,3 +82,7 @@ class Route:
             )
         return route_str
         # return f"Route ID:{self.id}: {' -> '.join([location.capitalize() for location in self.locations])}"
+
+
+# left to do:
+# encapsulate packages

@@ -1,4 +1,4 @@
-import tests.test_data as td
+from __future__ import annotations
 
 from commands.validation_helpers import (
     ensure_valid_email,
@@ -7,7 +7,9 @@ from commands.validation_helpers import (
     ensure_valid_last_name,
     ensure_valid_weight,
 )
-from models.route import Route
+from datetime import datetime
+
+# from models.route import Route
 
 
 class Package:
@@ -31,8 +33,8 @@ class Package:
         self._last_name = ensure_valid_last_name(last_name)
         self._phone_number = ensure_valid_phone(phone_number)
         self._email = ensure_valid_email(email)
-        self.route: Route = None
-        self._eta = None  # has to be implemented; estimated arrival time
+        # self.route: Route = None - does not work even with from __future__ breaks the code
+        self.eta = None  # has to be implemented; estimated arrival time
         # self._is_delivered_status = None
 
     @property
@@ -69,7 +71,23 @@ class Package:
 
     @property
     def eta(self):
-        pass
+        return self._eta
+
+    @eta.setter
+    def eta(self, value: datetime):
+        self._eta = value
+
+    def display_info(self):
+        return "\n".join(
+            [
+                f"-----INFO-----",
+                f"ID: {self.id}",
+                f"Weight: {self.weight}",
+                f"Destination: {self.end_loc}",
+                f"ETA: {self.eta}",
+                f"Status: unknown",
+            ]
+        )
 
     def __str__(self):
         return (

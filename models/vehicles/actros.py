@@ -9,10 +9,9 @@ class Actros(Vehicle):
     def __init__(self):
         super().__init__()
         self.range = Actros.ACTROS_MAX_TRAVEL_RANGE
-        self.weight = Actros.ACTROS_MAX_WEIGHT_CAPACITY
+        self.weight_capacity = Actros.ACTROS_MAX_WEIGHT_CAPACITY
         self.id = Vehicle.ACTROS_ID_NUMBER
         Vehicle.ACTROS_ID_NUMBER += 1
-
 
         if Actros.ACTROS_ID_NUMBER == 1042:
             raise OwnedVehicles("Actros")

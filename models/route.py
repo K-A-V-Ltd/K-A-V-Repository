@@ -76,7 +76,7 @@ class Route:
 
     def add_package(self, package: Package):
         for location in self.locations:
-            if package.start_loc == location.name:
+            if package.end_loc == location.name:
                 location.add_package(package)
 
     # finetune it

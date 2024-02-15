@@ -9,7 +9,7 @@ class Scania(Vehicle):
     def __init__(self):
         super().__init__()
         self.range = Scania.SCANIA_MAX_TRAVEL_RANGE
-        self.weight = Scania.SCANIA_MAX_WEIGHT_CAPACITY
+        self.weight_capacity = Scania.SCANIA_MAX_WEIGHT_CAPACITY
         self.id = Vehicle.SCANIA_ID_NUMBER
         Vehicle.SCANIA_ID_NUMBER += 1
 

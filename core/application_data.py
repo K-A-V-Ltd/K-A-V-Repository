@@ -4,7 +4,6 @@ from models.route import Route
 from models.vehicles.trucks_creation import Garage
 
 
-
 class ApplicationData:
     def __init__(self):
         self.unassigned_packages: list[Package] = (

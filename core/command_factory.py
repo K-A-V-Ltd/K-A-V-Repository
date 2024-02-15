@@ -30,3 +30,6 @@ class CommandFactory:
             return AssignPackage(params, self._app_data)
 
         raise InvalidCommand(cmd)
+
+
+# should we handle the error? so it doesn't crash - probably

@@ -1,3 +1,6 @@
+from models.route import Route
+
+
 class Vehicle:
     SCANIA_ID_NUMBER = 1001
     Man_ID_NUMBER = 1011
@@ -5,10 +8,12 @@ class Vehicle:
 
     def __init__(self):
 
-        self._packages = []
+        # self._packages = []
         self.weight = None
         self.range = None
-        # add route: route object
+        self.routes: list[Route] = []
+
+    # in need of refactoring
 
     @property
     def unused_capacity(self):

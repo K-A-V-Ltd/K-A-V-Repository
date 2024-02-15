@@ -29,13 +29,16 @@ class Package:
         self._start_loc = start_loc
         self._end_loc = end_loc
         self._weight = ensure_valid_weight(weight)
+        self.eta = None
+        self.status = None
+        # self._is_delivered_status = None
+
+        # -------contact info------------
+
         self._first_name = ensure_valid_first_name(first_name)
         self._last_name = ensure_valid_last_name(last_name)
         self._phone_number = ensure_valid_phone(phone_number)
         self._email = ensure_valid_email(email)
-        # self.route: Route = None - does not work even with from __future__ breaks the code
-        self.eta = None  # has to be implemented; estimated arrival time
-        # self._is_delivered_status = None
 
     @property
     def id(self):
@@ -54,6 +57,24 @@ class Package:
         return self._weight
 
     @property
+    def eta(self):
+        return self._eta
+
+    @eta.setter
+    def eta(self, value: datetime):
+        self._eta = value
+
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
+
+    # -------contact info --------
+
+    @property
     def first_name(self):
         return self._first_name
 
@@ -69,23 +90,19 @@ class Package:
     def email(self):
         return self._email
 
-    @property
-    def eta(self):
-        return self._eta
-
-    @eta.setter
-    def eta(self, value: datetime):
-        self._eta = value
-
     def display_info(self):
+
+        eta_str = "not assigned yet" if self.eta is None else str(self.eta)
+        status_str = "not assigned yet" if self.status is None else self.status
+
         return "\n".join(
             [
                 f"-----INFO-----",
                 f"ID: {self.id}",
                 f"Weight: {self.weight}",
                 f"Destination: {self.end_loc}",
-                f"ETA: {self.eta}",
-                f"Status: unknown",
+                f"ETA: {eta_str}",
+                f"Status: {status_str}",
             ]
         )
 

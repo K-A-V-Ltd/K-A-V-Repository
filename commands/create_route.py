@@ -2,6 +2,7 @@ from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
 from models.locs_distance import Locations
+from models.location import Location
 from commands.validation_helpers import validate_minimum_params_count, validate_time
 from datetime import datetime
 
@@ -35,8 +36,8 @@ class CreateRouteCommand(BaseCommand):
             datetime.strptime(start_str, "%b %d %H:%M").replace(year=2024)
         )
 
-        locations: list[str] = [
-            Locations.is_valid_location(loc_str) for loc_str in locs
+        locations: list[Location] = [
+            Location(Locations.is_valid_location(loc_str)) for loc_str in locs
         ]  # validate that each location is valid
 
         route = self.models_factory.create_route(departure_time, locations)

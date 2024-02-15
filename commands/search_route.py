@@ -1,6 +1,7 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from models.locs_distance import Locations
+from models.location import Location
 from commands.validation_helpers import try_parse_float, validate_params_count
 
 

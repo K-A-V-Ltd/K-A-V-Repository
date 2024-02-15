@@ -10,9 +10,10 @@ class Route:
         self._id = id
         self._departure_time = departure_time
         self._locations: list[Location] = locations
-        self.packages: list[Package] = []
         # self._truck = vehicle object
-        self.eta_list: list[datetime] = self._calculate_eta()  # modify it !!!
+
+        self._calculate_eta()
+        # self.packages: list[Package] = [] - do we need them ?
 
     @property
     def id(self):
@@ -32,55 +33,59 @@ class Route:
         for i in range(len(self.locations) - 1):
             start_loc = self.locations[i]
             end_loc = self.locations[i + 1]
-            total_distance += Locations.get_distance(start_loc, end_loc)
+            total_distance += Locations.get_distance(start_loc.name, end_loc.name)
         return total_distance
 
     def _calculate_eta(self):
         """
-        Calculates the estimated time of arrival for each location in the locations list.
+         Calculates the estimated time of arrival for each location in the locations list.
 
-        Returns:
-        - A list of datetime objects representing the estimated time of arrival for each destination.
+         Returns:
+        - a dict:
         """
-        eta_list = [self._departure_time]
-
+        self.locations[0].eta = self._departure_time
         start_time = self._departure_time
         avg_speed = int(87)
 
         for i in range(len(self.locations) - 1):
             start_loc = self.locations[i]
             end_loc = self.locations[i + 1]
-            distance = Locations.get_distance(start_loc, end_loc)
+            distance = Locations.get_distance(start_loc.name, end_loc.name)
             time_taken = distance / avg_speed
             start_time += timedelta(hours=time_taken)
-            eta_list.append(start_time)
+            end_loc.eta = start_time
 
-        return eta_list
-
-    def is_valid_for_package(self, start_loc, end_loc):
+    def is_valid_for_package(self, start_loc, end_loc) -> bool:
         """Checks if the route in question has the combination of two locations (start_loc and end_loc), while making sure that the start location is before the end location; intended to be used in conjunction with the find_suitable_route method in the ApplicationData class
 
         Returns:
         - a boolean"""
-        try:
-            start_index = self.locations.index(start_loc)
-            end_index = self.locations.index(end_loc)
-        except ValueError:
+
+        start_index = None
+        end_index = None
+        for i, loc in enumerate(self.locations):
+            if loc.name == start_loc:
+                start_index = i
+            elif loc.name == end_loc:
+                end_index = i
+
+        if start_index is None or end_index is None:
             return False
 
         return start_index < end_index
 
     def add_package(self, package: Package):
-        self.packages.append(package)
+        for location in self.locations:
+            if package.start_loc == location.name:
+                location.add_package(package)
 
     # finetune it
     def __str__(self):
         route_str = f"Route ID: {self.id}\n"
-        for i, loc in enumerate(self.locations):
-            route_str += (
-                f"Location: {loc}, ETA: {self.eta_list[i].strftime('%b %d %H:%M')}\n"
-            )
-        return route_str
+        location_str = " -> ".join(location.name for location in self.locations)
+
+        return route_str + location_str
+
         # return f"Route ID:{self.id}: {' -> '.join([location.capitalize() for location in self.locations])}"
 
 

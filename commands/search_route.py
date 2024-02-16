@@ -27,4 +27,4 @@ class SearchRouteCommand(BaseCommand):
         if not suitable_routes:
             return f"There is no suitable route for this package."
         else:
-            return f"{'\n'.join([str(route) for route in suitable_routes])}"
+            return '\n'.join([str(route) for route in suitable_routes])

@@ -2,6 +2,8 @@ from __future__ import annotations
 from models.package import Package
 from models.route import Route
 from models.vehicles.trucks_creation import Garage
+import pickle
+import os
 
 
 class ApplicationData:
@@ -50,3 +52,23 @@ class ApplicationData:
     def display_routes(self):
         for route in self._routes:
             print(route.start_time)
+
+    def save_system_data(self):
+        system_data = {"unassigned_packages": self.unassigned_packages,
+                       "all_packages": self.all_packages,
+                       "routes": self.routes,
+                       "garage": self._garage}
+        path = "core/application_data.pickle"
+        if not os.path.exists(os.path.dirname(path)):
+            os.makedirs(os.path.dirname(path))
+        with open(path, "wb") as file:
+            pickle.dump(system_data, file)
+
+    def load_system_data(self):
+        if os.path.isfile("core/application_data.pickle"):
+            with open("core/application_data.pickle", "rb") as file:
+                system_data = pickle.load(file)
+                self.unassigned_packages = system_data["unassigned_packages"]
+                self.all_packages = system_data["all_packages"]
+                self.routes = system_data["routes"]
+                self._garage = system_data["garage"]

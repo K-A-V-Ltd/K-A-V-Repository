@@ -6,7 +6,7 @@ from commands.view_pack_info import ViewPackageInfo
 from commands.assign_package import AssignPackage
 from commands.assign_truck import AssignTruck
 from core.models_factory import ModelsFactory
-from errors.invalid_command import InvalidCommand
+from errors.invalid_command import InvalidCommandError
 
 
 class CommandFactory:
@@ -32,7 +32,7 @@ class CommandFactory:
         if cmd.lower() == "assigntruck":
             return AssignTruck(params, self._app_data)
 
-        raise InvalidCommand(cmd)
+        raise InvalidCommandError(cmd)
 
 
 # should we handle the error? so it doesn't crash - probably

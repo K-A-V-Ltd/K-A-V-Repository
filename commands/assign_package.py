@@ -13,8 +13,11 @@ class AssignPackage(BaseCommand):
 
         package_id, route_id = self.params
 
-        package_id = try_parse_int(package_id)
-        route_id = try_parse_int(route_id)
+        try:
+            package_id = try_parse_int(package_id)
+            route_id = try_parse_int(route_id)
+        except ValueError as e:
+            return f"ValueError: {e}"
 
         package = self.app_data.find_package_by_id(package_id)
 

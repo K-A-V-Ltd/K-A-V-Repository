@@ -9,7 +9,10 @@ class ViewPackageInfo(BaseCommand):
         validate_params_count(params, 1, "ViewPackage")
 
     def execute(self):
-        package_id = try_parse_int(self.params[0])
+        try:
+            package_id = try_parse_int(self.params[0])
+        except ValueError as e:
+            return f"ValueError: {e}"
 
         package = self.app_data.find_package_by_id(package_id)
 

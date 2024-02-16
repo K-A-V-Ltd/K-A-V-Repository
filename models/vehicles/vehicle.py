@@ -1,9 +1,4 @@
 from models.route import Route
-from errors.truck_errors import (
-    WeightOverCapacityError,
-    RangeOverTotalError,
-    TimeOverlapError,
-)
 
 
 class Vehicle:
@@ -20,7 +15,8 @@ class Vehicle:
         self.range = None
         self.routes: list[Route] = []
 
-        # in need of refactoring
+    def add_route(self, route: Route):
+        self.routes.append(route)
 
     def is_valid_for_route(self, route: Route) -> bool:
 
@@ -29,17 +25,6 @@ class Vehicle:
             or self.range <= route.total_distance
             or self.overlap(route)
         )
-
-    def add_route(self, route: Route):
-        self.routes.append(route)
-
-    # refactor all validating logic by combining it and wrapping in try, except block
-    # def add_route(self, new_route):
-    #     if self.overlap(new_route):
-    #         print("Cannot assign this truck because of time overlap.")
-    #     else:
-    #         self.routes.append(new_route)
-    #         print("Successfully assigned.")
 
     def overlap(self, new_route):
         for route in self.routes:

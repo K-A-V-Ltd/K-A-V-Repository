@@ -1,8 +1,9 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from models.locs_distance import Locations
-from models.location import Location
 from commands.validation_helpers import try_parse_float, validate_params_count
+from errors.invalid_location import InvalidLocationError
+from errors.invalid_params import InvalidParamsError
 
 
 class SearchRouteCommand(BaseCommand):
@@ -19,8 +20,11 @@ class SearchRouteCommand(BaseCommand):
     def execute(self):
         start_loc, end_loc = self.params
 
-        start_loc = Locations.is_valid_location(start_loc)
-        end_loc = Locations.is_valid_location(end_loc)
+        try:
+            start_loc = Locations.is_valid_location(start_loc)
+            end_loc = Locations.is_valid_location(end_loc)
+        except InvalidLocationError as e:
+            return f"Invalid location: {e}"
 
         suitable_routes = self._app_data.find_suitable_route(start_loc, end_loc)
 

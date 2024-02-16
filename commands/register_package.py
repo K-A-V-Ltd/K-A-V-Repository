@@ -3,6 +3,7 @@ from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
 from models.locs_distance import Locations
 from commands.validation_helpers import try_parse_float, validate_params_count
+from errors.invalid_location import InvalidLocationError
 
 
 class RegisterPackageCommand(BaseCommand):
@@ -25,17 +26,30 @@ class RegisterPackageCommand(BaseCommand):
 
         (*params,) = self.params
 
-        start_loc = Locations.is_valid_location(params[0])
-        end_loc = Locations.is_valid_location(params[1])
-        weight = try_parse_float(params[2])
+        try:
+            start_loc = Locations.is_valid_location(params[0])
+            end_loc = Locations.is_valid_location(params[1])
+        except InvalidLocationError as e:
+            return f"Invalid location {e}"
+
+        try:
+            weight = try_parse_float(params[2])
+
+        except ValueError as e:
+            return f"ValueError: {e}"
+
         first_name = params[3]
         last_name = params[4]
         phone_number = params[5]
         email = params[6]
 
-        package = self.models_factory.create_package(
-            start_loc, end_loc, weight, first_name, last_name, phone_number, email
-        )
+        try:
+            package = self.models_factory.create_package(
+                start_loc, end_loc, weight, first_name, last_name, phone_number, email
+            )
+        except ValueError as e:
+            return f"PackageError: {e}"
+
         self.app_data.add_package(package)
 
         return f"Package #{package.id} successfully registered."

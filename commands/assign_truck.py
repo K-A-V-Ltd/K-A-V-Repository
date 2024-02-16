@@ -11,7 +11,10 @@ class AssignTruck(BaseCommand):
 
     def execute(self):
 
-        route_id = try_parse_int(self.params[0])
+        try:
+            route_id = try_parse_int(self.params[0])
+        except ValueError as e:
+            return f"ValueError: {e}"
 
         route = self.app_data.find_route_by_id(route_id)
 

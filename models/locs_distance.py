@@ -1,4 +1,4 @@
-from errors.invalid_location import InvalidLocation
+from errors.invalid_location import InvalidLocationError
 
 
 class Locations:
@@ -26,7 +26,7 @@ class Locations:
     @staticmethod
     def is_valid_location(location: str) -> str:
         if location.lower() not in Locations.CITY:
-            raise InvalidLocation(location)
+            raise InvalidLocationError(location)
         return location.capitalize()
 
     @staticmethod

@@ -2,6 +2,10 @@ from __future__ import annotations
 from models.package import Package
 from models.route import Route
 from models.vehicles.trucks_creation import Garage
+from models.vehicles.vehicle import Vehicle
+from models.vehicles.actros import Actros
+from models.vehicles.man import Man
+from models.vehicles.scania import Scania
 
 
 class ApplicationData:
@@ -13,7 +17,7 @@ class ApplicationData:
             []
         )  # they are stashed also here for easier access to their info, might remove later and use a dictionary
         self.routes: list[Route] = []
-        self._garage = Garage  # The approach might be changed.
+        self._garage: list[Vehicle] = Garage  # The approach might be changed.
 
     def add_package(self, package: Package):
         self.unassigned_packages.append(package)
@@ -21,6 +25,14 @@ class ApplicationData:
 
     def add_route(self, route: Route):
         self.routes.append(route)
+
+    # REFACTOR taking into account what is going on with in the Vehicle class
+    def find_suitable_truck(self, route: Route):
+        for truck in self._garage:
+            if truck.is_valid_for_route(route):
+                return truck
+
+        return None
 
     def find_suitable_route(self, start_location, end_location):
         suitable_routes: list[Route] = []

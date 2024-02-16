@@ -8,6 +8,7 @@ class Actros(Vehicle):
 
     def __init__(self):
         super().__init__()
+        self.make = "Actros"
         self.range = Actros.ACTROS_MAX_TRAVEL_RANGE
         self.weight_capacity = Actros.ACTROS_MAX_WEIGHT_CAPACITY
         self.id = Vehicle.ACTROS_ID_NUMBER
@@ -17,3 +18,7 @@ class Actros(Vehicle):
             raise OwnedVehicles("Actros")
         else:
             Actros.ACTROS_ID_NUMBER += 1
+
+
+# to-do:
+# encapsulate properties, readonly, only getters

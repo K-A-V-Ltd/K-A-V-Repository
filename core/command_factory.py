@@ -4,6 +4,7 @@ from commands.search_route import SearchRouteCommand
 from commands.view_unassigned import ViewUnassignedPackages
 from commands.view_pack_info import ViewPackageInfo
 from commands.assign_package import AssignPackage
+from commands.assign_truck import AssignTruck
 from core.models_factory import ModelsFactory
 from errors.invalid_command import InvalidCommand
 
@@ -28,6 +29,8 @@ class CommandFactory:
             return ViewPackageInfo(params, self._app_data)
         if cmd.lower() == "assignpackage":
             return AssignPackage(params, self._app_data)
+        if cmd.lower() == "assigntruck":
+            return AssignTruck(params, self._app_data)
 
         raise InvalidCommand(cmd)
 

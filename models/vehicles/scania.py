@@ -8,6 +8,7 @@ class Scania(Vehicle):
 
     def __init__(self):
         super().__init__()
+        self.make = "Scania"
         self.range = Scania.SCANIA_MAX_TRAVEL_RANGE
         self.weight_capacity = Scania.SCANIA_MAX_WEIGHT_CAPACITY
         self.id = Vehicle.SCANIA_ID_NUMBER
@@ -17,3 +18,7 @@ class Scania(Vehicle):
             raise OwnedVehicles("Scania")
         else:
             Scania.SCANIA_ID_NUMBER += 1
+
+
+# to-do:
+# encapsulate properties, readonly, only getters

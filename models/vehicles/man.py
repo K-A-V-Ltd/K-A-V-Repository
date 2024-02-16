@@ -8,6 +8,7 @@ class Man(Vehicle):
 
     def __init__(self):
         super().__init__()
+        self.make = "Man"
         self.range = Man.Man_MAX_TRAVEL_RANGE
         self.weight_capacity = Man.MAN_MAX_WEIGHT_CAPACITY
         self.id = Vehicle.Man_ID_NUMBER
@@ -16,3 +17,7 @@ class Man(Vehicle):
             raise OwnedVehicles("Man")
         else:
             Man.Man_ID_NUMBER += 1
+
+
+# to-do:
+# encapsulate properties, readonly, only getters

@@ -92,7 +92,9 @@ class Package:
 
     def display_info(self):
 
-        eta_str = "not assigned yet" if self.eta is None else str(self.eta)
+        eta_str = (
+            "not assigned yet" if self.eta is None else self.eta.strftime("%b %d %H:%M")
+        )
         status_str = "not assigned yet" if self.status is None else self.status
 
         return "\n".join(

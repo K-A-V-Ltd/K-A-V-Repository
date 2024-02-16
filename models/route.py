@@ -2,6 +2,7 @@ from __future__ import annotations
 from models.locs_distance import Locations
 from models.location import Location
 from models.package import Package
+# from models.vehicles.vehicle import Vehicle
 from datetime import datetime, timedelta
 
 
@@ -10,10 +11,9 @@ class Route:
         self._id = id
         self._departure_time = departure_time
         self._locations: list[Location] = locations
-        # self._truck = vehicle object
+        self.truck = None
 
         self._calculate_eta()
-        # self.packages: list[Package] = [] - do we need them ?
 
     @property
     def id(self):
@@ -26,6 +26,14 @@ class Route:
     @property
     def locations(self):
         return tuple(self._locations)
+    
+    @property
+    def truck(self):
+        return self._truck
+
+    @truck.setter
+    def truck(self, truck):
+        self._truck = truck
 
     @property
     def total_distance(self):
@@ -35,6 +43,16 @@ class Route:
             end_loc = self.locations[i + 1]
             total_distance += Locations.get_distance(start_loc.name, end_loc.name)
         return total_distance
+
+    @property
+    def total_weight(self):
+        total_weight = sum(location.weight for location in self._locations)
+        return total_weight
+    
+    @property
+    def total_time(self):
+        last_eta = self._locations[-1].eta
+        return self._departure_time, last_eta
 
     def _calculate_eta(self):
         """
@@ -82,9 +100,13 @@ class Route:
     # finetune it
     def __str__(self):
         route_str = f"Route ID: {self.id}\n"
-        location_str = " -> ".join(location.name for location in self.locations)
+        location_str = " -> ".join(f"{location.name} ({location.eta.strftime("%b %d %H:%M")})" for location in self.locations)
+    
+        total_distance_str = f"\nTotal distance: {self.total_distance}\n"
+        total_weight_str = f"Total weight: {self.total_weight}\n"
+        truck_str = f'No truck assigned yet.' if self._truck == None else self._truck.display_info()
 
-        return route_str + location_str
+        return route_str + location_str + total_distance_str + total_weight_str + truck_str
 
         # return f"Route ID:{self.id}: {' -> '.join([location.capitalize() for location in self.locations])}"
 

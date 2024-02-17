@@ -1,71 +1,131 @@
 import unittest
 import test_data as td
-from errors.vehicles_limit import OwnedVehicles
+from core.models_factory import ModelsFactory
+from models.location import Location
 from models.vehicles.man import Man
-from models.package import Package
+from models.route import Route
 
 
 class ManShould(unittest.TestCase):
+
     def test_validDataTypes(self):
         # Arrange
         object_actros = Man()
 
         # Act & Assert
-        self.assertIsInstance(object_actros.packages, list)
+        self.assertEqual(object_actros.make, "Man")
+        self.assertIsInstance(object_actros.id, int)
+        self.assertIsInstance(object_actros.weight_capacity, int)
+        self.assertIsInstance(object_actros.range, int)
+        self.assertIsInstance(object_actros.routes, list)
 
-    def test_addPackage_method(self):
+    def test_addRoute_appendsSuccessfully(self):
         # Arrange
         object_actros = Man()
-        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
-                          td.VALID_FIRST_NAME,
-                          td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
+        models_factory = ModelsFactory()
+        location = Location("Sydney")
+        route = models_factory.create_route(td.DEPARTURE_TIME, [location])
 
         # Act
-        object_actros.add_package(package)
+        object_actros.add_route(route)
 
         # Assert
-        self.assertIn(package, object_actros.packages)
+        self.assertIn(route, object_actros.routes)
 
-    def test_addPackage_raisesError_ifNone(self):
+    def test_checkTimeOverlapReturnsTrue_whenItOverlaps(self):
         # Arrange
         object_actros = Man()
-        package = None
+        models_factory = ModelsFactory()
+        location = Location("Sydney")
 
-        # Act & Assert
-        with self.assertRaises(ValueError):
-            object_actros.add_package(package)
-
-    def test_removePackage_method(self):
-        # Arrange
-        object_actros = Man()
-        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
-                          td.VALID_FIRST_NAME,
-                          td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Act
-        object_actros.add_package(package)
-        object_actros.remove_package(package)
+        route1 = models_factory.create_route(td.DEPARTURE_TIME, [location])
+        route2 = models_factory.create_route(td.DEPARTURE_TIME, [location])
 
         # Assert
-        self.assertNotIn(package, object_actros.packages)
+        self.assertEqual(True, object_actros.check_time_overlap(route1, route2))
 
-    def test_removePackage_raisesError_ifNonExistent(self):
+    def test_checkTimeOverlapReturnsFalse_whenDoesntOverlap(self):
         # Arrange
         object_actros = Man()
-        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
-                          td.VALID_FIRST_NAME,
-                          td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
+        models_factory = ModelsFactory()
+        location = Location("Sydney")
+        location2 = Location("Perth")
 
-        # Act & Assert
-        with self.assertRaises(ValueError):
-            object_actros.remove_package(package)
+        # Act
+        route1 = models_factory.create_route(td.DEPARTURE_TIME, [location])
+        route2 = models_factory.create_route(td.DEPARTURE_TIME2, [location2])
 
-    def test_remainingCapacityReturnsSuccessfully(self):
+        # Assert
+        self.assertEqual(False, object_actros.check_time_overlap(route1, route2))
+
+    def test_overlapReturnsTrue_whenOverlaps(self):
+        # Arrange
         object_actros = Man()
-        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
-                          td.VALID_FIRST_NAME, td.VALID_LAST_NAME, td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
+        models_factory = ModelsFactory()
+        location = Location("Sydney")
 
-        object_actros.add_package(package)
-        result = object_actros.weight - package.weight
+        # Act
+        route = models_factory.create_route(td.DEPARTURE_TIME, [location])
+        object_actros.add_route(route)
+        new_route = models_factory.create_route(td.DEPARTURE_TIME, [location])
 
-        self.assertEqual(object_actros.unused_capacity, result)
+        # Assert
+        self.assertEqual(True, object_actros.overlap(new_route))
+
+    def test_overlapReturnsFalse_whenDoesntOverlap(self):
+        # Arrange
+        object_actros = Man()
+        models_factory = ModelsFactory()
+        location = Location("Sydney")
+
+        # Act
+        new_route = models_factory.create_route(td.DEPARTURE_TIME, [location])
+
+        # Assert
+        self.assertEqual(False, object_actros.overlap(new_route))
+
+    def test_isValidForRouteReturns_trueWhenValid(self):
+        # Arrange
+        object_actros = Man()
+        models_factory = ModelsFactory()
+        location = Location("Sydney")
+
+        # Act
+        route = models_factory.create_route(td.DEPARTURE_TIME, [location])
+
+        # Assert
+        self.assertEqual(True, object_actros.is_valid_for_route(route))
+
+    def test_isValidForRouteReturns_falseWhenInvalid(self):
+        # Arrange
+        object_actros = Man()
+        models_factory = ModelsFactory()
+        location = Location("Sydney")
+        location.weight = 11111111111111111111111 #kg  (Big package ^^)
+
+        # Act
+        route = models_factory.create_route(td.DEPARTURE_TIME, [location])
+
+
+
+        # Assert
+        self.assertEqual(False, object_actros.is_valid_for_route(route))
+
+
+    def test_displayInfoCorrectOutput(self):
+        # Arrange
+        object_actros = Man()
+
+        # Act
+        output = "\n".join(
+            [
+                f"ID: {object_actros.id}",
+                f"Make: {'Man'}",
+                f"Weight Capacity: {37000}",
+                f"Range: {10000}",
+            ])
+
+        # Assert
+        self.assertEqual(object_actros.display_info(), output)

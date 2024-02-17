@@ -32,7 +32,7 @@ class ModelsFactory:
             email,
         )
 
-    def create_route(self, departure_time: datetime, locations: list[str]):
+    def create_route(self, departure_time: datetime, locations: list):
         route_id = self._route_id
         self._route_id += 1
 

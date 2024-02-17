@@ -8,10 +8,10 @@ class Actros(Vehicle):
 
     def __init__(self):
         super().__init__()
-        self.make = "Actros"
-        self.range = Actros.ACTROS_MAX_TRAVEL_RANGE
-        self.weight_capacity = Actros.ACTROS_MAX_WEIGHT_CAPACITY
-        self.id = Vehicle.ACTROS_ID_NUMBER
+        self._make = "Actros"
+        self._range = Actros.ACTROS_MAX_TRAVEL_RANGE
+        self._weight_capacity = Actros.ACTROS_MAX_WEIGHT_CAPACITY
+        self._id = Vehicle.ACTROS_ID_NUMBER
         Vehicle.ACTROS_ID_NUMBER += 1
 
         if Actros.ACTROS_ID_NUMBER == 1042:
@@ -19,6 +19,3 @@ class Actros(Vehicle):
         else:
             Actros.ACTROS_ID_NUMBER += 1
 
-
-# to-do:
-# encapsulate properties, readonly, only getters

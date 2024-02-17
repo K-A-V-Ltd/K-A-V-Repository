@@ -37,3 +37,5 @@ class ModelsFactory:
         self._route_id += 1
 
         return Route(route_id, departure_time, locations)
+
+

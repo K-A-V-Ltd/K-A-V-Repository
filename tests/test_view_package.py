@@ -1,6 +1,4 @@
 import unittest
-
-from commands.view_pack_info import ViewPackageInfo
 from core.application_data import ApplicationData
 from core.command_factory import CommandFactory
 from models.package import Package
@@ -12,6 +10,8 @@ def test_setup():
     cmd_factory = CommandFactory(app_data)
 
     return cmd_factory, app_data
+
+
 class ViewPackageInfoShould(unittest.TestCase):
     def test_ViewPackageInfo_command_whenEmpty(self):
         # Arrange
@@ -27,8 +27,7 @@ class ViewPackageInfoShould(unittest.TestCase):
         if package is None:
             self.assertRaises(ValueError)
         else:
-            pass # More code needed
-
+            pass  # More code needed
 
     def test_ViewPackageInfo_command_whenNonEmpty(self):
         # Arrange

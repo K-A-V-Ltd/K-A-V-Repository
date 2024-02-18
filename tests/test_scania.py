@@ -5,7 +5,6 @@ from models.location import Location
 from models.vehicles.scania import Scania
 
 
-
 class ActrosShould(unittest.TestCase):
 
     def test_validDataTypes(self):
@@ -37,7 +36,6 @@ class ActrosShould(unittest.TestCase):
         object_actros = Scania()
         models_factory = ModelsFactory()
         location = Location("Sydney")
-
 
         # Act
         route1 = models_factory.create_route(td.DEPARTURE_TIME, [location])
@@ -103,16 +101,13 @@ class ActrosShould(unittest.TestCase):
         object_actros = Scania()
         models_factory = ModelsFactory()
         location = Location("Sydney")
-        location.weight = 11111111111111111111111 #kg  (Big package ^^)
+        location.weight = 11111111111111111111111  # kg  (Big package ^^)
 
         # Act
         route = models_factory.create_route(td.DEPARTURE_TIME, [location])
 
-
-
         # Assert
         self.assertEqual(False, object_actros.is_valid_for_route(route))
-
 
     def test_displayInfoCorrectOutput(self):
         # Arrange
@@ -128,4 +123,4 @@ class ActrosShould(unittest.TestCase):
             ])
 
         # Assert
-        self.assertEqual(object_actros.display_info(),output)
+        self.assertEqual(object_actros.display_info(), output)

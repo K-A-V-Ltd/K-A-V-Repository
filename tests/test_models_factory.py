@@ -2,6 +2,7 @@ import unittest
 
 from core.models_factory import ModelsFactory
 import test_data as td
+from models.location import Location
 from models.package import Package
 from models.route import Route
 
@@ -10,44 +11,41 @@ class ModelsFactoryShould(unittest.TestCase):
     def test_createValidRouteInstance(self):
         # Arrange
         models_factory = ModelsFactory()
-        departure_time = td.DEPARTURE_TIME
-        locations = []
+        location = Location("Sydney")
 
         # Act
-        test = models_factory.create_route(departure_time, locations)
+        route = models_factory.create_route(td.DEPARTURE_TIME, [location])
 
         # Assert
-        self.assertIsInstance(test,Route)
-        self.assertEqual(1, test.id)
-        self.assertEqual((), test.locations)
+        self.assertIsInstance(route, Route)
+        self.assertEqual(1, route.id)
+        self.assertEqual((location,), route.locations)
 
     def test_createRoutesWithConsecutiveIds(self):
         # Arrange
         models_factory = ModelsFactory()
-        departure_time = td.DEPARTURE_TIME
-        locations = []
+        location = Location("Sydney")
 
         # Act
-        test = models_factory.create_route(departure_time, locations)
-        test1 = models_factory.create_route(departure_time, locations)
-
+        route = models_factory.create_route(td.DEPARTURE_TIME, [location])
+        route1 = models_factory.create_route(td.DEPARTURE_TIME, [location])
 
         # Assert
-        self.assertEqual(1, test.id)
-        self.assertEqual(2, test1.id)
-
+        self.assertEqual(1, route.id)
+        self.assertEqual(2, route1.id)
 
     def test_createValidPackageInstance(self):
         # Arrange
         models_factory = ModelsFactory()
 
         # Act
-        package = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
-                    td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
+        package = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+                                                td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
+                                                td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Assert
         self.assertIsInstance(package, Package)
-        self.assertEqual(1,package.id)
+        self.assertEqual(1, package.id)
 
     def test_createPackagesWithConsecutiveIds(self):
         # Arrange
@@ -58,20 +56,9 @@ class ModelsFactoryShould(unittest.TestCase):
                                                 td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
                                                 td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
         package1 = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
-                                                td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
-                                                td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
+                                                 td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
+                                                 td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
         # Assert
         self.assertEqual(1, package.id)
         self.assertEqual(2, package1.id)
-
-
-
-
-
-
-
-
-
-
-

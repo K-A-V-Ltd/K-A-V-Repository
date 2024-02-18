@@ -1,21 +1,15 @@
 import unittest
-
 from commands.assign_package import AssignPackage
 from commands.assign_truck import AssignTruck
 from commands.create_route import CreateRouteCommand
 from commands.register_package import RegisterPackageCommand
 from commands.search_route import SearchRouteCommand
-from commands.validation_helpers import try_parse_int
 from commands.view_pack_info import ViewPackageInfo
 from commands.view_unassigned import ViewUnassignedPackages
-from core import models_factory
 from core.application_data import ApplicationData
 from core.command_factory import CommandFactory
 from core.models_factory import ModelsFactory
 from errors.invalid_command import InvalidCommandError
-from models.location import Location
-from models.package import Package
-import test_data as td
 
 
 def test_setup():
@@ -84,14 +78,12 @@ class CommandFactoryShould(unittest.TestCase):
         cmd_factory, app_data = test_setup()
         the_input = "viewunassignedpackages"
 
-
         # Act
         command = cmd_factory.create(the_input)
 
         # Assert
         self.assertIsInstance(command, ViewUnassignedPackages)
         self.assertEqual(app_data, command.app_data)
-
 
     def test_createViewPackageInfoCommand_withCorrectParams(self):
         # Arrange
@@ -118,8 +110,8 @@ class CommandFactoryShould(unittest.TestCase):
 
         # Assert
         self.assertIsInstance(command, AssignPackage)
-        self.assertEqual(app_data,command.app_data)
-        self.assertEqual(comparer,command.params)
+        self.assertEqual(app_data, command.app_data)
+        self.assertEqual(comparer, command.params)
 
     def test_createAssignTruckCommand_withCorrectParams(self):
         # Arrange
@@ -134,6 +126,3 @@ class CommandFactoryShould(unittest.TestCase):
         self.assertIsInstance(command, AssignTruck)
         self.assertEqual(app_data, command.app_data)
         self.assertEqual(comparer, command.params)
-
-
-

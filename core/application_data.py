@@ -55,11 +55,11 @@ class ApplicationData:
         return None
 
     def display_packs(self):
-        for pack in self._packages:
+        for pack in self.all_packages:
             print(pack.weight)
 
     def display_routes(self):
-        for route in self._routes:
+        for route in self.routes:
             print(route.start_time)
 
     def save_system_data(self):

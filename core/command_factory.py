@@ -14,6 +14,10 @@ class CommandFactory:
         self._app_data = data
         self._models_factory = ModelsFactory()
 
+    @property
+    def app_data(self):
+        return self._app_data
+
     def create(self, input_line):
         cmd, *params = input_line.split()
 

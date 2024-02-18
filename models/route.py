@@ -11,7 +11,7 @@ class Route:
         self._id = id
         self._departure_time = departure_time
         self._locations: list[Location] = locations
-        self.truck = None
+        self._truck = None
 
         self._calculate_eta()
 
@@ -100,7 +100,7 @@ class Route:
     # finetune it
     def __str__(self):
         route_str = f"Route ID: {self.id}\n"
-        location_str = " -> ".join(f"{location.name} ({location.eta.strftime("%b %d %H:%M")})" for location in self.locations)
+        location_str = " -> ".join(f"{location.name} ({location.eta.strftime('%b %d %H:%M')})" for location in self.locations)
     
         total_distance_str = f"\nTotal distance: {self.total_distance}\n"
         total_weight_str = f"Total weight: {self.total_weight}\n"

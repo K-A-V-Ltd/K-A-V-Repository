@@ -53,6 +53,15 @@ class Route:
     def total_time(self):
         last_eta = self._locations[-1].eta
         return self._departure_time, last_eta
+    
+    # current stop, as in closest stop or next stop? 
+    @property
+    def current_stop(self) -> Location:
+        now = datetime.now()
+        closest_stop = min(self._locations, key=lambda loc: abs(loc.eta - now))
+        return closest_stop.name
+    
+  
 
     def _calculate_eta(self):
         """
@@ -105,8 +114,9 @@ class Route:
         total_distance_str = f"\nTotal distance: {self.total_distance}\n"
         total_weight_str = f"Total weight: {self.total_weight}\n"
         truck_str = f'No truck assigned yet.' if self._truck == None else self._truck.display_info()
+        current_stop = f'Current stop: {self.current_stop}'
 
-        return route_str + location_str + total_distance_str + total_weight_str + truck_str
+        return route_str + location_str + total_distance_str + total_weight_str + truck_str + '\n' + current_stop
 
         # return f"Route ID:{self.id}: {' -> '.join([location.capitalize() for location in self.locations])}"
 

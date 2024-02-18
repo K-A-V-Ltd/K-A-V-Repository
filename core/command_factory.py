@@ -1,10 +1,10 @@
 from commands.register_package import RegisterPackageCommand
 from commands.create_route import CreateRouteCommand
 from commands.search_route import SearchRouteCommand
-from commands.view_unassigned import ViewUnassignedPackages
-from commands.view_pack_info import ViewPackageInfo
-from commands.assign_package import AssignPackage
-from commands.assign_truck import AssignTruck
+from commands.view_unassigned import ViewUnassignedPackagesCommand
+from commands.view_pack_info import ViewPackageInfoCommand
+from commands.assign_package import AssignPackageCommand
+from commands.assign_truck import AssignTruckCommand
 from core.models_factory import ModelsFactory
 from errors.invalid_command import InvalidCommandError
 
@@ -24,13 +24,13 @@ class CommandFactory:
         if cmd.lower() == "searchroute":
             return SearchRouteCommand(params, self._app_data)
         if cmd.lower() == "viewunassignedpackages":
-            return ViewUnassignedPackages(params, self._app_data)
+            return ViewUnassignedPackagesCommand(params, self._app_data)
         if cmd.lower() == "viewpackageinfo":
-            return ViewPackageInfo(params, self._app_data)
+            return ViewPackageInfoCommand(params, self._app_data)
         if cmd.lower() == "assignpackage":
-            return AssignPackage(params, self._app_data)
+            return AssignPackageCommand(params, self._app_data)
         if cmd.lower() == "assigntruck":
-            return AssignTruck(params, self._app_data)
+            return AssignTruckCommand(params, self._app_data)
 
         raise InvalidCommandError(cmd)
 

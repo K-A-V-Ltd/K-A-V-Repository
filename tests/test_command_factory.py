@@ -1,11 +1,11 @@
 import unittest
-from commands.assign_package import AssignPackage
-from commands.assign_truck import AssignTruck
+from commands.assign_package import AssignPackageCommand
+from commands.assign_truck import AssignTruckCommand
 from commands.create_route import CreateRouteCommand
 from commands.register_package import RegisterPackageCommand
 from commands.search_route import SearchRouteCommand
-from commands.view_pack_info import ViewPackageInfo
-from commands.view_unassigned import ViewUnassignedPackages
+from commands.view_pack_info import ViewPackageInfoCommand
+from commands.view_unassigned import ViewUnassignedPackagesCommand
 from core.application_data import ApplicationData
 from core.command_factory import CommandFactory
 from core.models_factory import ModelsFactory
@@ -82,7 +82,7 @@ class CommandFactoryShould(unittest.TestCase):
         command = cmd_factory.create(the_input)
 
         # Assert
-        self.assertIsInstance(command, ViewUnassignedPackages)
+        self.assertIsInstance(command, ViewUnassignedPackagesCommand)
         self.assertEqual(app_data, command.app_data)
 
     def test_createViewPackageInfoCommand_withCorrectParams(self):
@@ -95,7 +95,7 @@ class CommandFactoryShould(unittest.TestCase):
         command = cmd_factory.create(the_input)
 
         # Assert
-        self.assertIsInstance(command, ViewPackageInfo)
+        self.assertIsInstance(command, ViewPackageInfoCommand)
         self.assertEqual(app_data, command.app_data)
         self.assertEqual(comparer, command.params)
 
@@ -109,7 +109,7 @@ class CommandFactoryShould(unittest.TestCase):
         command = cmd_factory.create(the_input)
 
         # Assert
-        self.assertIsInstance(command, AssignPackage)
+        self.assertIsInstance(command, AssignPackageCommand)
         self.assertEqual(app_data, command.app_data)
         self.assertEqual(comparer, command.params)
 
@@ -123,6 +123,6 @@ class CommandFactoryShould(unittest.TestCase):
         command = cmd_factory.create(the_input)
 
         # Assert
-        self.assertIsInstance(command, AssignTruck)
+        self.assertIsInstance(command, AssignTruckCommand)
         self.assertEqual(app_data, command.app_data)
         self.assertEqual(comparer, command.params)

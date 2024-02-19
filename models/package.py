@@ -108,20 +108,14 @@ class Package:
 
         return "\n".join(
             [
-                f"-----INFO-----",
                 f"ID: {self.id}",
                 f"Weight: {self.weight}",
                 f"Destination: {self.end_loc}",
                 f"ETA: {eta_str}",
                 f"Status: {self.status}",
+                "-----contact info-----",
+                f"Name: {self.first_name} {self.last_name}",
+                f"Phone: {self.phone_number}",
+                f"E-mail: {self.email}",
             ]
-        )
-
-    def __str__(self):
-        return (
-            f"Package with weight: {self._weight}\n"
-            f"Sent from: {self._start_loc}\n"
-            f"Sent to: {self._end_loc}\n"
-            f"Sent by: {self._first_name} {self._last_name}\n"
-            f"Sender contact information: {self._email} Phone number: {self._phone_number}\n"
         )

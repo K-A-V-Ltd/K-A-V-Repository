@@ -39,7 +39,7 @@ class Route:
     # 
     @property 
     def status(self):
-        if self._departure_time < my_time():
+        if self._departure_time > my_time():
             return "waiting to start"
         elif self._locations[-1].eta < my_time():
             return "finished"

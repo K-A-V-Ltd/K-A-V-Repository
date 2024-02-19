@@ -4,7 +4,6 @@ from models.location import Location
 from models.package import Package
 from datetime import datetime, timedelta
 from utils.time_abstraction import my_time
-from errors.over_capacity import OverCapacityError
 
 
 class Route:

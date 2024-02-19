@@ -8,6 +8,7 @@ from commands.validation_helpers import (
     ensure_valid_weight,
 )
 from datetime import datetime
+from utils.time_abstraction import my_time
 
 # from models.route import Route
 
@@ -31,7 +32,6 @@ class Package:
         self._weight = ensure_valid_weight(weight)
         self.eta = None
         self.status = None
-        # self._is_delivered_status = None
 
         # -------contact info------------
 
@@ -90,12 +90,21 @@ class Package:
     def email(self):
         return self._email
 
-    def display_info(self):
+    def update_status(self):
+        now = my_time()
+        if self.eta == None:
+            self.status = "not assigned yet"
+        else:
+            if now < self.eta:
+                self.status = "on its way"
+            if now >= self.eta:
+                self.status = f'delivered on {self.eta.strftime("%b %d %H:%M")}'
 
+    def display_info(self):
+        self.update_status()
         eta_str = (
             "not assigned yet" if self.eta is None else self.eta.strftime("%b %d %H:%M")
         )
-        status_str = "not assigned yet" if self.status is None else self.status
 
         return "\n".join(
             [
@@ -104,7 +113,7 @@ class Package:
                 f"Weight: {self.weight}",
                 f"Destination: {self.end_loc}",
                 f"ETA: {eta_str}",
-                f"Status: {status_str}",
+                f"Status: {self.status}",
             ]
         )
 

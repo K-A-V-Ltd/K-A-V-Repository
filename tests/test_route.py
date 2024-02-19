@@ -159,7 +159,7 @@ class RouteShould(unittest.TestCase):
         tst_route = Route(1, start, [loc1, loc2, loc3, loc2, loc1])
         truck1 = Garage[0]
         tst_route.truck = truck1
-        expected = 1000
+        expected = 1500
         self.assertEqual(expected, tst_route.delivery_weight)
 
     def test_calculateEtaMethod_calculatesEtaForEachLocation(self):

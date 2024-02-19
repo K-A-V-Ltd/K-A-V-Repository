@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from models.package import Package  # causing problems circular imports
+from models.package import Package
 
 
 class Location:
     def __init__(self, name: str):
         self._name = name
         self.weight = 0
-        self.packages: list[Package] = []  # circular imports
-        self.eta = None  # have to implement eta
+        self.packages: list[Package] = []
+        self.eta = None
 
     @property
     def name(self):
@@ -33,7 +33,7 @@ class Location:
     def add_package(self, package: Package):
         self.packages.append(package)
         package.eta = self.eta
-        package.status = "assigned"  # change later (different stages)
+        package.status = "assigned"  # change later (different stages): when the route becomes active - "on its way", when passing end location - is delivered
         self._weight += package.weight
 
     def remove_package(self, package):

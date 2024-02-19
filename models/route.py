@@ -4,6 +4,7 @@ from models.location import Location
 from models.package import Package
 # from models.vehicles.vehicle import Vehicle
 from datetime import datetime, timedelta
+from utils.time_abstraction import my_time
 
 
 class Route:
@@ -35,6 +36,11 @@ class Route:
     def truck(self, truck):
         self._truck = truck
 
+    # 
+    @property 
+    def status(self):
+        pass
+
     @property
     def total_distance(self):
         total_distance = 0
@@ -54,14 +60,14 @@ class Route:
         last_eta = self._locations[-1].eta
         return self._departure_time, last_eta
     
-    # current stop, as in closest stop or next stop? 
-    @property
-    def current_stop(self) -> Location:
-        now = datetime.now()
-        closest_stop = min(self._locations, key=lambda loc: abs(loc.eta - now))
-        return closest_stop.name
     
-  
+    @property
+    def next_stop(self) -> Location:
+        now = my_time()
+        next_stop = min(self._locations, key=lambda loc: loc.eta - now)
+        return next_stop
+    
+
 
     def _calculate_eta(self):
         """
@@ -72,7 +78,7 @@ class Route:
         """
         self.locations[0].eta = self._departure_time
         start_time = self._departure_time
-        avg_speed = int(87)
+        avg_speed = int(87) # use literal, no magic numbers 
 
         for i in range(len(self.locations) - 1):
             start_loc = self.locations[i]
@@ -114,7 +120,7 @@ class Route:
         total_distance_str = f"\nTotal distance: {self.total_distance}\n"
         total_weight_str = f"Total weight: {self.total_weight}\n"
         truck_str = f'No truck assigned yet.' if self._truck == None else self._truck.display_info()
-        current_stop = f'Current stop: {self.current_stop}'
+        current_stop = f'Current stop: {self.next_stop.name}'
 
         return route_str + location_str + total_distance_str + total_weight_str + truck_str + '\n' + current_stop
 

@@ -14,9 +14,8 @@ class Scania(Vehicle):
         self._id = Vehicle.SCANIA_ID_NUMBER
         Vehicle.SCANIA_ID_NUMBER += 1
 
+        # do we need this validation, considering we are creating the garage using list comprehension and there is no command that creates more trucks?
         if Scania.SCANIA_ID_NUMBER == 1012:
             raise OwnedVehicles("Scania")
         else:
             Scania.SCANIA_ID_NUMBER += 1
-
-

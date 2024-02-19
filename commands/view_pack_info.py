@@ -3,7 +3,7 @@ from core.application_data import ApplicationData
 from commands.validation_helpers import validate_params_count, try_parse_int
 
 
-class ViewPackageInfo(BaseCommand):
+class ViewPackageInfoCommand(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData):
         super().__init__(params, app_data)
         validate_params_count(params, 1, "ViewPackage")

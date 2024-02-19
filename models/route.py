@@ -4,6 +4,7 @@ from models.location import Location
 from models.package import Package
 # from models.vehicles.vehicle import Vehicle
 from datetime import datetime, timedelta
+from utils.time_abstraction import my_time
 
 
 class Route:
@@ -11,7 +12,7 @@ class Route:
         self._id = id
         self._departure_time = departure_time
         self._locations: list[Location] = locations
-        self.truck = None
+        self._truck = None
 
         self._calculate_eta()
 
@@ -35,6 +36,16 @@ class Route:
     def truck(self, truck):
         self._truck = truck
 
+    # 
+    @property 
+    def status(self):
+        if self._departure_time > my_time():
+            return "waiting to start"
+        elif self._locations[-1].eta < my_time():
+            return "finished"
+        else:
+            return "in progress"
+
     @property
     def total_distance(self):
         total_distance = 0
@@ -53,6 +64,19 @@ class Route:
     def total_time(self):
         last_eta = self._locations[-1].eta
         return self._departure_time, last_eta
+    
+    @property 
+    def delivery_weight(self):
+        next_stop_index = self._locations.index(self.next_stop)
+        delivery_weight = sum(loc.weight for loc in self._locations[:next_stop_index])
+        return delivery_weight
+
+    @property
+    def next_stop(self) -> Location:
+        now = my_time()
+        next_stop = min(self._locations, key=lambda loc: loc.eta - now)
+        return next_stop
+    
 
     def _calculate_eta(self):
         """
@@ -63,7 +87,7 @@ class Route:
         """
         self.locations[0].eta = self._departure_time
         start_time = self._departure_time
-        avg_speed = int(87)
+        avg_speed = int(87) # use literal, no magic numbers 
 
         for i in range(len(self.locations) - 1):
             start_loc = self.locations[i]
@@ -100,13 +124,14 @@ class Route:
     # finetune it
     def __str__(self):
         route_str = f"Route ID: {self.id}\n"
-        location_str = " -> ".join(f"{location.name} ({location.eta.strftime("%b %d %H:%M")})" for location in self.locations)
+        location_str = " -> ".join(f"{location.name} ({location.eta.strftime('%b %d %H:%M')})" for location in self.locations)
     
         total_distance_str = f"\nTotal distance: {self.total_distance}\n"
         total_weight_str = f"Total weight: {self.total_weight}\n"
         truck_str = f'No truck assigned yet.' if self._truck == None else self._truck.display_info()
+        current_stop = f'Current stop: {self.next_stop.name}'
 
-        return route_str + location_str + total_distance_str + total_weight_str + truck_str
+        return route_str + location_str + total_distance_str + total_weight_str + truck_str + '\n' + current_stop
 
         # return f"Route ID:{self.id}: {' -> '.join([location.capitalize() for location in self.locations])}"
 

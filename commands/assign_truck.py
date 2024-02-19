@@ -3,7 +3,7 @@ from core.application_data import ApplicationData
 from commands.validation_helpers import validate_params_count, try_parse_int
 
 
-class AssignTruck(BaseCommand):
+class AssignTruckCommand(BaseCommand):
 
     def __init__(self, params: list[str], app_data: ApplicationData):
         super().__init__(params, app_data)

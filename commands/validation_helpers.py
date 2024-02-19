@@ -3,6 +3,7 @@ from datetime import datetime
 from errors.invalid_params import InvalidParamsError
 from errors.invalid_minimum_params import InvalidMinimumParams
 from errors.invalid_time import InvalidTime
+from utils.time_abstraction import my_time
 
 
 def validate_params_count(params: list[str], count: int, cmd_name: str):
@@ -16,7 +17,7 @@ def validate_minimum_params_count(params: list[str], count: int, cmd_name: str):
 
 
 def validate_time(departure_time: datetime):
-    if departure_time < datetime.now():
+    if departure_time < my_time():
         raise InvalidTime(departure_time)
     else:
         return departure_time
@@ -39,6 +40,7 @@ def try_parse_int(s):
 # ---------VALIDATIONS FOR CLASS PACKAGE------------
 
 
+# maybe add a maximum
 def ensure_valid_weight(value):
     if value <= 0.5:
         raise ValueError("Weight should be above 0.5kg")
@@ -56,8 +58,6 @@ def ensure_valid_phone(value):
 
 
 # add a length requirement as well
-
-
 def ensure_valid_email(value):
     if not ("@gmail.com" in value or "@yahoo.com" in value):
         raise ValueError("Email should contain '@gmail.com' or '@yahoo.com'")

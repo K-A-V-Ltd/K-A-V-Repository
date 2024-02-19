@@ -16,7 +16,7 @@ class ActrosShould(unittest.TestCase):
         self.assertIsInstance(object_actros.id, int)
         self.assertIsInstance(object_actros.weight_capacity, int)
         self.assertIsInstance(object_actros.range, int)
-        self.assertIsInstance(object_actros.routes, list)
+        self.assertIsInstance(object_actros.routes, tuple)
 
     def test_addRoute_appendsSuccessfully(self):
         # Arrange

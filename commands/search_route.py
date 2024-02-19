@@ -7,7 +7,6 @@ from errors.invalid_params import InvalidParamsError
 
 
 class SearchRouteCommand(BaseCommand):
-    # currently the command works by receiving as input two locations (start and end); we could also make it based on package id
 
     def __init__(
         self,

@@ -9,14 +9,14 @@ class ActrosShould(unittest.TestCase):
 
     def test_validDataTypes(self):
         # Arrange
-        object_actros = Scania()
+        object_scania = Scania()
 
         # Act & Assert
-        self.assertEqual(object_actros.make, "Scania")
-        self.assertIsInstance(object_actros.id, int)
-        self.assertIsInstance(object_actros.weight_capacity, int)
-        self.assertIsInstance(object_actros.range, int)
-        self.assertIsInstance(object_actros.routes, list)
+        self.assertEqual(object_scania.make, "Scania")
+        self.assertIsInstance(object_scania.id, int)
+        self.assertIsInstance(object_scania.weight_capacity, int)
+        self.assertIsInstance(object_scania.range, int)
+        self.assertIsInstance(object_scania.routes, tuple)
 
     def test_addRoute_appendsSuccessfully(self):
         # Arrange

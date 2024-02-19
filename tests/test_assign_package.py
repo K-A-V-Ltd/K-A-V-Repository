@@ -1,6 +1,6 @@
 import unittest
 
-from commands.assign_package import AssignPackage
+from commands.assign_package import AssignPackageCommand
 from core.application_data import ApplicationData
 from core.command_factory import CommandFactory
 from core.models_factory import ModelsFactory
@@ -17,11 +17,11 @@ def test_setup():
     return cmd_factory, app_data
 
 
-class AssignPackageShould(unittest.TestCase):
+class AssignPackageCommandShould(unittest.TestCase):
     def test_assignPackageExecute_raiseValueError_whenInvalidParams(self):
         # Arrange
         cmd_factory, app_data = test_setup()
-        test_object = AssignPackage(["k", "h"], app_data)
+        test_object = AssignPackageCommand(["k", "h"], app_data)
 
         package_id = test_object.params[0]
         route_id = test_object.params[1]

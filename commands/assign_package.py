@@ -29,6 +29,11 @@ class AssignPackageCommand(BaseCommand):
         if route is None:
             return "There is no such route in the system."
 
+        if route.truck.weight_capacity < route.total_weight + package.weight:
+            return (
+                "The truck assigned to this route has already reached its max capacity."
+            )
+
         route.add_package(package)
         self.app_data.unassigned_packages.remove(package)
 

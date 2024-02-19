@@ -5,9 +5,8 @@ from core.application_data import ApplicationData
 from core.command_factory import CommandFactory
 from core.models_factory import ModelsFactory
 from models.location import Location
-from models.package import Package
 import test_data as td
-from models.route import Route
+
 
 
 def test_setup():
@@ -58,7 +57,7 @@ class AssignPackageCommandShould(unittest.TestCase):
         # Assert
         self.assertEqual(command.execute(), "There is no such route in the system.")
 
-    def test_AssignPackageMethod_successfulAssignment(self):
+    def test_AssignPackageMethod_whenTruckCapacityReached(self):
         # Arrange
         models_factory = ModelsFactory()
         cmd_factory, app_data, = test_setup()
@@ -66,7 +65,7 @@ class AssignPackageCommandShould(unittest.TestCase):
         the_input = "assignPackage 1 1"
 
         location = Location("Sydney")
-        package = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5,
+        package = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 99999999,
                                                 td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
                                                 td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
         route = models_factory.create_route(td.DEPARTURE_TIME, [location])
@@ -75,6 +74,29 @@ class AssignPackageCommandShould(unittest.TestCase):
         command = cmd_factory.create(the_input)
         app_data.add_package(package)
         app_data.add_route(route)
+        route.truck = app_data._garage[0]
+
+        # Assert
+        self.assertEqual(command.execute(), "The truck assigned to this route has already reached its max capacity.")
+
+    def test_AssignPackageMethod_successfulAssignment(self):
+        # Arrange
+        models_factory = ModelsFactory()
+        cmd_factory, app_data, = test_setup()
+
+        the_input = "assignPackage 1 1"
+
+        location = Location("Sydney")
+        package = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 100,
+                                                td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
+                                                td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
+        route = models_factory.create_route(td.DEPARTURE_TIME, [location])
+
+        # Act
+        command = cmd_factory.create(the_input)
+        app_data.add_package(package)
+        app_data.add_route(route)
+        route.truck = app_data._garage[0]
 
         # Assert
         self.assertEqual(command.execute(), f"Package #{1} successfully assigned to route #{1}.")

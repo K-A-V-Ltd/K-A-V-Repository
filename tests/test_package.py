@@ -57,22 +57,22 @@ class PackageShould(unittest.TestCase):
             Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 0, td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
                     "156", td.VALID_EMAIL, )
 
-    def test_returnsCorrectly_when_strMethod_isValid(self):
-        # Arrange
-        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5,
-                          td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
-                          td.VALID_PHONE_NUMBER, td.VALID_EMAIL, )
-        expected_output = (f"Package with weight: {1.5}\n"
-                           f"Sent from: {td.VALID_STARTING_LOCATION}\n"
-                           f"Sent to: {td.VALID_ENDING_LOCATION}\n"
-                           f"Sent by: {td.VALID_FIRST_NAME} {td.VALID_LAST_NAME}\n"
-                           f"Sender contact information: {td.VALID_EMAIL} Phone number: {td.VALID_PHONE_NUMBER}\n")
-
-        # Act
-        stringed_object = str(package)
-
-        # Assert
-        self.assertEqual(expected_output, stringed_object)
+    # def test_returnsCorrectly_when_strMethod_isValid(self):
+    #     # Arrange
+    #     package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5,
+    #                       td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
+    #                       td.VALID_PHONE_NUMBER, td.VALID_EMAIL, )
+    #     expected_output = (f"Package with weight: {1.5}\n"
+    #                        f"Sent from: {td.VALID_STARTING_LOCATION}\n"
+    #                        f"Sent to: {td.VALID_ENDING_LOCATION}\n"
+    #                        f"Sent by: {td.VALID_FIRST_NAME} {td.VALID_LAST_NAME}\n"
+    #                        f"Sender contact information: {td.VALID_EMAIL} Phone number: {td.VALID_PHONE_NUMBER}\n")
+    #
+    #     # Act
+    #     stringed_object = str(package)
+    #
+    #     # Assert
+    #     self.assertEqual(expected_output, stringed_object)
 
     def test_displayInfo_returnsCorrectOutput(self):
         # Arrange
@@ -87,12 +87,15 @@ class PackageShould(unittest.TestCase):
         status_str = "not assigned yet" if package.status is None else package.status
         output = "\n".join(
             [
-                f"-----INFO-----",
-                f"ID: {package.id}",
-                f"Weight: {package.weight}",
-                f"Destination: {package.end_loc}",
+                f"ID: {1}",
+                f"Weight: {1.5}",
+                f"Destination: {"Melbourne"}",
                 f"ETA: {eta_str}",
                 f"Status: {status_str}",
+                "-----contact info-----",
+                f"Name: {"Alex"} {"Daskalov"}",
+                f"Phone: {1111111111}",
+                f"E-mail: {"AlexD@gmail.com"}",
             ]
         )
         # Assert

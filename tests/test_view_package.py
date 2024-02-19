@@ -53,12 +53,15 @@ class ViewPackageInfoShould(unittest.TestCase):
         status_str = "not assigned yet" if package.status is None else package.status
         output = "\n".join(
             [
-                f"-----INFO-----",
-                f"ID: {package.id}",
-                f"Weight: {package.weight}",
-                f"Destination: {package.end_loc}",
+                f"ID: {1}",
+                f"Weight: {1.5}",
+                f"Destination: {"Melbourne"}",
                 f"ETA: {eta_str}",
                 f"Status: {status_str}",
+                "-----contact info-----",
+                f"Name: {"Alex"} {"Daskalov"}",
+                f"Phone: {"1111111111"}",
+                f"E-mail: {"AlexD@gmail.com"}",
             ]
         )
 

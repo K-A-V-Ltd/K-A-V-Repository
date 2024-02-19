@@ -120,7 +120,7 @@ class Route:
         total_distance_str = f"\nTotal distance: {self.total_distance}\n"
         total_weight_str = f"Total weight: {self.total_weight}\n"
         truck_str = f'No truck assigned yet.' if self._truck == None else self._truck.display_info()
-        current_stop = f'Current stop: {self.next_stop}'
+        current_stop = f'Current stop: {self.next_stop.name}'
 
         return route_str + location_str + total_distance_str + total_weight_str + truck_str + '\n' + current_stop
 

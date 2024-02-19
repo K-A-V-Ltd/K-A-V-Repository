@@ -1,6 +1,6 @@
 import unittest
 
-from commands.assign_truck import AssignTruck
+from commands.assign_truck import AssignTruckCommand
 from core.application_data import ApplicationData
 from core.command_factory import CommandFactory
 from core.models_factory import ModelsFactory
@@ -20,7 +20,7 @@ class AssignTruckShould(unittest.TestCase):
     def test_assignTruckExecuteMethod_raiseValueError_whenInvalidParams(self):
         # Arrange
         cmd_factory, app_data = test_setup()
-        test_object = AssignTruck(["k"], app_data)
+        test_object = AssignTruckCommand(["k"], app_data)
 
         # Act
         route_id = test_object.params[0]

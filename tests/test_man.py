@@ -3,21 +3,20 @@ import test_data as td
 from core.models_factory import ModelsFactory
 from models.location import Location
 from models.vehicles.man import Man
-from models.route import Route
 
 
 class ManShould(unittest.TestCase):
 
     def test_validDataTypes(self):
         # Arrange
-        object_actros = Man()
+        object_man = Man()
 
         # Act & Assert
-        self.assertEqual(object_actros.make, "Man")
-        self.assertIsInstance(object_actros.id, int)
-        self.assertIsInstance(object_actros.weight_capacity, int)
-        self.assertIsInstance(object_actros.range, int)
-        self.assertIsInstance(object_actros.routes, list)
+        self.assertEqual(object_man.make, "Man")
+        self.assertIsInstance(object_man.id, int)
+        self.assertIsInstance(object_man.weight_capacity, int)
+        self.assertIsInstance(object_man.range, int)
+        self.assertIsInstance(object_man.routes, tuple)
 
     def test_addRoute_appendsSuccessfully(self):
         # Arrange
@@ -37,7 +36,6 @@ class ManShould(unittest.TestCase):
         object_actros = Man()
         models_factory = ModelsFactory()
         location = Location("Sydney")
-
 
         # Act
         route1 = models_factory.create_route(td.DEPARTURE_TIME, [location])
@@ -103,16 +101,13 @@ class ManShould(unittest.TestCase):
         object_actros = Man()
         models_factory = ModelsFactory()
         location = Location("Sydney")
-        location.weight = 11111111111111111111111 #kg  (Big package ^^)
+        location.weight = 11111111111111111111111  # kg  (Big package ^^)
 
         # Act
         route = models_factory.create_route(td.DEPARTURE_TIME, [location])
 
-
-
         # Assert
         self.assertEqual(False, object_actros.is_valid_for_route(route))
-
 
     def test_displayInfoCorrectOutput(self):
         # Arrange

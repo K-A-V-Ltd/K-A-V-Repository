@@ -1,6 +1,6 @@
 import unittest
 
-from commands.view_unassigned import ViewUnassignedPackages
+from commands.view_unassigned import ViewUnassignedPackagesCommand
 from core.application_data import ApplicationData
 from core.command_factory import CommandFactory
 
@@ -18,7 +18,7 @@ class ViewUnassignedPackagesShould(unittest.TestCase):
         # Arrange
         cmd_factory, app_data = test_setup()
         the_input = "viewunassignedPackages"
-        comparer = ViewUnassignedPackages([the_input], app_data)
+        comparer = ViewUnassignedPackagesCommand([the_input], app_data)
 
         # Act
         empty_output = "There are no unassigned packages at the moment."

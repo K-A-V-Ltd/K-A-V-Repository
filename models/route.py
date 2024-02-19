@@ -39,7 +39,12 @@ class Route:
     # 
     @property 
     def status(self):
-        pass
+        if self._departure_time < my_time():
+            return "waiting to start"
+        elif self._locations[-1].eta < my_time():
+            return "finished"
+        else:
+            return "in progress"
 
     @property
     def total_distance(self):

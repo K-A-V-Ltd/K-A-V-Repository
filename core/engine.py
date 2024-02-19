@@ -6,7 +6,7 @@ class Engine:
     def __init__(self, factory: CommandFactory):
         self._command_factory = factory
         self.app_data = (
-            self._command_factory._app_data
+            self._command_factory.app_data
         )  # Link to the App_data of the system
 
     def start(self):

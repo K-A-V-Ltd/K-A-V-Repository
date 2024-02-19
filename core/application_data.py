@@ -60,7 +60,7 @@ class ApplicationData:
 
     def display_routes(self):
         for route in self.routes:
-            print(route.start_time)
+            print(route.departure_time)
 
     def save_system_data(self):
         system_data = {
@@ -83,3 +83,4 @@ class ApplicationData:
                 self.all_packages = system_data["all_packages"]
                 self.routes = system_data["routes"]
                 self._garage = system_data["garage"]
+

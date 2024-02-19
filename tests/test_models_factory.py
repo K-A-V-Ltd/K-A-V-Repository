@@ -39,7 +39,7 @@ class ModelsFactoryShould(unittest.TestCase):
         models_factory = ModelsFactory()
 
         # Act
-        package = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+        package = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5,
                                                 td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
                                                 td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
@@ -52,10 +52,10 @@ class ModelsFactoryShould(unittest.TestCase):
         models_factory = ModelsFactory()
 
         # Act
-        package = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+        package = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5,
                                                 td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
                                                 td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
-        package1 = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+        package1 = models_factory.create_package(td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5,
                                                  td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
                                                  td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 

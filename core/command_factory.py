@@ -33,6 +33,3 @@ class CommandFactory:
             return AssignTruckCommand(params, self._app_data)
 
         raise InvalidCommandError(cmd)
-
-
-# should we handle the error? so it doesn't crash - probably

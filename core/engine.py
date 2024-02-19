@@ -19,7 +19,11 @@ class Engine:
                     self.app_data.save_system_data()  # Save system data on exit.
                     break
 
-                command = self._command_factory.create(input_line)
-                print(command.execute())
-        except InvalidCommandError as e:
-            print(f"InvalidCommandError: {e}")
+                try:
+                    command = self._command_factory.create(input_line)
+                    print(command.execute())
+                except InvalidCommandError as e:
+                    print(f"InvalidCommandError: {e}")
+
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")

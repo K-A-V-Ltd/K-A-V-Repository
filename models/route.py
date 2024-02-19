@@ -65,14 +65,18 @@ class Route:
         last_eta = self._locations[-1].eta
         return self._departure_time, last_eta
     
-    
+    @property 
+    def delivery_weight(self):
+        next_stop_index = self._locations.index(self.next_stop)
+        delivery_weight = sum(loc.weight for loc in self._locations[:next_stop_index])
+        return delivery_weight
+
     @property
     def next_stop(self) -> Location:
         now = my_time()
         next_stop = min(self._locations, key=lambda loc: loc.eta - now)
         return next_stop
     
-
 
     def _calculate_eta(self):
         """

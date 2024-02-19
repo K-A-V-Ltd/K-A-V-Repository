@@ -25,5 +25,6 @@ createRoute Nov 22 18:43 Perth Sydney Brisbane
 searchRoute Perth Adelaide
 assignPackage 2 3
 viewPackageInfo 2
+AssignTruck 1
 exit
 """

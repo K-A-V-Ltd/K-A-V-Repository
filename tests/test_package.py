@@ -8,7 +8,7 @@ import test_data as td
 class PackageShould(unittest.TestCase):
     def test_validDataTypes(self):
         # Arrange & Act
-        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5,
                           td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
                           td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
         # Assert
@@ -22,7 +22,7 @@ class PackageShould(unittest.TestCase):
 
     def test_validETA(self):
         # Arrange
-        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5,
                           td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
                           td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
         # Act
@@ -33,17 +33,17 @@ class PackageShould(unittest.TestCase):
 
     def test_init_raiseError_firstNameInvalid(self):
         with self.assertRaises(ValueError):
-            Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, "", td.VALID_LAST_NAME,
+            Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5, "", td.VALID_LAST_NAME,
                     td.VALID_PHONE_NUMBER, td.VALID_EMAIL, )
 
     def test_init_raiseError_lastNameInvalid(self):
         with self.assertRaises(ValueError):
-            Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME, "",
+            Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5, td.VALID_FIRST_NAME, "",
                     td.VALID_PHONE_NUMBER, td.VALID_EMAIL)
 
     def test_init_raiseError_EmailInvalid(self):
         with self.assertRaises(ValueError):
-            Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE, td.VALID_FIRST_NAME,
+            Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5, td.VALID_FIRST_NAME,
                     td.VALID_LAST_NAME,
                     td.VALID_PHONE_NUMBER, "")
 
@@ -59,10 +59,10 @@ class PackageShould(unittest.TestCase):
 
     def test_returnsCorrectly_when_strMethod_isValid(self):
         # Arrange
-        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5,
                           td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
                           td.VALID_PHONE_NUMBER, td.VALID_EMAIL, )
-        expected_output = (f"Package with weight: {td.VALID_PACKAGE}\n"
+        expected_output = (f"Package with weight: {1.5}\n"
                            f"Sent from: {td.VALID_STARTING_LOCATION}\n"
                            f"Sent to: {td.VALID_ENDING_LOCATION}\n"
                            f"Sent by: {td.VALID_FIRST_NAME} {td.VALID_LAST_NAME}\n"
@@ -76,7 +76,7 @@ class PackageShould(unittest.TestCase):
 
     def test_displayInfo_returnsCorrectOutput(self):
         # Arrange
-        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, td.VALID_PACKAGE,
+        package = Package(1, td.VALID_STARTING_LOCATION, td.VALID_ENDING_LOCATION, 1.5,
                           td.VALID_FIRST_NAME, td.VALID_LAST_NAME,
                           td.VALID_PHONE_NUMBER, td.VALID_EMAIL, )
 

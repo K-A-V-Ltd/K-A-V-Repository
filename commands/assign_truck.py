@@ -28,8 +28,3 @@ class AssignTruck(BaseCommand):
 
         return f"Truck #{truck.id} successfully assigned to route #{route.id}"
 
-    # for checking correct initialization----delete later
-    # truck_info = []
-    # for truck in self.app_data._garage:
-    # truck_info.append(truck.display_info())
-    # return "\n\n".join(truck_info)

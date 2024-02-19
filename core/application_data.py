@@ -83,3 +83,4 @@ class ApplicationData:
                 self.all_packages = system_data["all_packages"]
                 self.routes = system_data["routes"]
                 self._garage = system_data["garage"]
+

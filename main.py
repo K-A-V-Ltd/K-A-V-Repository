@@ -36,6 +36,6 @@ registerPackage Sydney Brisbane 22.5 Sophia Martinez 0423568970 sophia.martinez@
 registerPackage Sydney Brisbane 21.0 Benjamin Anderson 0498765432 benjamin.anderson@gmail.com
 registerPackage Sydney Brisbane 23.8 Mia Thomas 0467890123 mia.thomas@gmail.com
 registerPackage Sydney Brisbane 20.0 Ethan Jackson 0432109876 ethan.jackson@gmail.com
-AssignTruck 1
+
 exit
 """

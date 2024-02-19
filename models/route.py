@@ -2,9 +2,9 @@ from __future__ import annotations
 from models.locs_distance import Locations
 from models.location import Location
 from models.package import Package
-# from models.vehicles.vehicle import Vehicle
 from datetime import datetime, timedelta
 from utils.time_abstraction import my_time
+from errors.over_capacity import OverCapacityError
 
 
 class Route:
@@ -27,7 +27,7 @@ class Route:
     @property
     def locations(self):
         return tuple(self._locations)
-    
+
     @property
     def truck(self):
         return self._truck
@@ -36,8 +36,8 @@ class Route:
     def truck(self, truck):
         self._truck = truck
 
-    # 
-    @property 
+    #
+    @property
     def status(self):
         if self._departure_time > my_time():
             return "waiting to start"
@@ -59,13 +59,13 @@ class Route:
     def total_weight(self):
         total_weight = sum(location.weight for location in self._locations)
         return total_weight
-    
+
     @property
     def total_time(self):
         last_eta = self._locations[-1].eta
         return self._departure_time, last_eta
-    
-    @property 
+
+    @property
     def delivery_weight(self):
         next_stop_index = self._locations.index(self.next_stop)
         delivery_weight = sum(loc.weight for loc in self._locations[next_stop_index:])
@@ -76,7 +76,6 @@ class Route:
         now = my_time()
         next_stop = min(self._locations, key=lambda loc: loc.eta - now)
         return next_stop
-    
 
     def _calculate_eta(self):
         """
@@ -87,7 +86,7 @@ class Route:
         """
         self.locations[0].eta = self._departure_time
         start_time = self._departure_time
-        avg_speed = int(87) # use literal, no magic numbers 
+        avg_speed = int(87)  # use literal, no magic numbers
 
         for i in range(len(self.locations) - 1):
             start_loc = self.locations[i]
@@ -125,18 +124,16 @@ class Route:
         route_str = f"Route ID: {self.id}\n"
         location_str = " -> ".join(location.name for location in self.locations)
         delivery_weight = self.delivery_weight
-        next_stop = self.next_stop.name 
+        next_stop = self.next_stop.name
 
         return f"{route_str}{location_str}\nDelivery weight: {delivery_weight}\nNext stop: {next_stop}"
-        
 
-  
     def __str__(self):
         route_str = f"Route ID: {self.id}\n"
-        location_str = " -> ".join(f"{location.name} ({location.eta.strftime('%b %d %H:%M')})" for location in self.locations)
-
-
-
+        location_str = " -> ".join(
+            f"{location.name} ({location.eta.strftime('%b %d %H:%M')})"
+            for location in self.locations
+        )
 
 
 # left to do:

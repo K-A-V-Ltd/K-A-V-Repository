@@ -13,9 +13,3 @@ class Man(Vehicle):
         self._weight_capacity = Man.MAN_MAX_WEIGHT_CAPACITY
         self._id = Vehicle.Man_ID_NUMBER
         Vehicle.Man_ID_NUMBER += 1
-
-        # do we need this? look at comment in Scania
-        if Man.Man_ID_NUMBER == 1027:
-            raise OwnedVehicles("Man")
-        else:
-            Man.Man_ID_NUMBER += 1

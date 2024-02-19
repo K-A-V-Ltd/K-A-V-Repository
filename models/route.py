@@ -68,7 +68,7 @@ class Route:
     @property 
     def delivery_weight(self):
         next_stop_index = self._locations.index(self.next_stop)
-        delivery_weight = sum(loc.weight for loc in self._locations[:next_stop_index])
+        delivery_weight = sum(loc.weight for loc in self._locations[next_stop_index:])
         return delivery_weight
 
     @property
@@ -121,19 +121,23 @@ class Route:
             if package.end_loc == location.name:
                 location.add_package(package)
 
-    # finetune it
+    def display_info(self):
+        route_str = f"Route ID: {self.id}\n"
+        location_str = " -> ".join(location.name for location in self.locations)
+        delivery_weight = self.delivery_weight
+        next_stop = self.next_stop.name 
+
+        return f"{route_str}{location_str}\nDelivery weight: {delivery_weight}\nNext stop: {next_stop}"
+        
+
+  
     def __str__(self):
         route_str = f"Route ID: {self.id}\n"
         location_str = " -> ".join(f"{location.name} ({location.eta.strftime("%b %d %H:%M")})" for location in self.locations)
-    
-        total_distance_str = f"\nTotal distance: {self.total_distance}\n"
-        total_weight_str = f"Total weight: {self.total_weight}\n"
-        truck_str = f'No truck assigned yet.' if self._truck == None else self._truck.display_info()
-        current_stop = f'Current stop: {self.next_stop.name}'
 
-        return route_str + location_str + total_distance_str + total_weight_str + truck_str + '\n' + current_stop
+        return route_str + location_str
 
-        # return f"Route ID:{self.id}: {' -> '.join([location.capitalize() for location in self.locations])}"
+
 
 
 # left to do:

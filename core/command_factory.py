@@ -5,6 +5,8 @@ from commands.view_unassigned import ViewUnassignedPackagesCommand
 from commands.view_pack_info import ViewPackageInfoCommand
 from commands.assign_package import AssignPackageCommand
 from commands.assign_truck import AssignTruckCommand
+from commands.view_routes import ViewActiveRoutesCommand
+from commands.bulk_assign import BulkAssignCommand
 from core.models_factory import ModelsFactory
 from errors.invalid_command import InvalidCommandError
 
@@ -31,5 +33,9 @@ class CommandFactory:
             return AssignPackageCommand(params, self._app_data)
         if cmd.lower() == "assigntruck":
             return AssignTruckCommand(params, self._app_data)
+        if cmd.lower() == "viewactiveroutes":
+            return ViewActiveRoutesCommand(params, self._app_data)
+        if cmd.lower() == "bulkassign":
+            return BulkAssignCommand(params, self._app_data)
 
         raise InvalidCommandError(cmd)

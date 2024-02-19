@@ -35,9 +35,16 @@ class BulkAssignCommand(BaseCommand):
                 self.app_data.unassigned_packages.remove(package)
                 assigned.append(package_id)
 
-        if not_found:
-            return f"The following packages were not found: {', '.join(map(str, not_found))}."
-        else:
-            return (
-                f"{len(assigned)} packages successfully assigned to route #{route_id}."
-            )
+        assigned_str = (
+            f"{len(assigned)} packages successfully assigned to route #{route_id}: "
+            + ", ".join(map(str, assigned))
+            if assigned
+            else ""
+        )
+        not_found_str = (
+            f"The following packages were not found: {', '.join(map(str, not_found))}."
+            if not_found
+            else ""
+        )
+
+        return assigned_str + "\n" + not_found_str

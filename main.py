@@ -26,6 +26,16 @@ createRoute Nov 22 18:43 Perth Sydney Brisbane
 searchRoute Perth Adelaide
 assignPackage 2 3
 viewPackageInfo 2
+registerPackage Sydney Brisbane 20.5 Jane Smith 0498237456 jane.smith@gmail.com
+registerPackage Sydney Brisbane 22.0 Michael Johnson 0412345678 michael.johnson@gmail.com
+registerPackage Sydney Brisbane 21.8 Emily Brown 0432156897 emily.brown@gmail.com
+registerPackage Sydney Brisbane 23.2 David Wilson 0478963214 david.wilson@gmail.com
+registerPackage Sydney Brisbane 24.0 Olivia Jones 0456789231 olivia.jones@gmail.com
+registerPackage Sydney Brisbane 19.7 James Taylor 0489753102 james.taylor@gmail.com
+registerPackage Sydney Brisbane 22.5 Sophia Martinez 0423568970 sophia.martinez@gmail.com
+registerPackage Sydney Brisbane 21.0 Benjamin Anderson 0498765432 benjamin.anderson@gmail.com
+registerPackage Sydney Brisbane 23.8 Mia Thomas 0467890123 mia.thomas@gmail.com
+registerPackage Sydney Brisbane 20.0 Ethan Jackson 0432109876 ethan.jackson@gmail.com
 
 exit
 """

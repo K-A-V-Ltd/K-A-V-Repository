@@ -134,7 +134,7 @@ class Route:
     def __str__(self):
         route_str = f"Route ID: {self.id}\n"
         location_str = " -> ".join(f"{location.name} ({location.eta.strftime('%b %d %H:%M')})" for location in self.locations)
-
+        return route_str + location_str
 
 
 

@@ -6,7 +6,6 @@ from core.models_factory import ModelsFactory
 from errors.invalid_minimum_params import InvalidMinimumParams
 
 
-
 class CreateRouteShould(unittest.TestCase):
     def test_initializerRaisesError_whenParamsNotEnough(self):
         APP_DATA = ApplicationData()

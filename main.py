@@ -38,6 +38,20 @@ searchRoute Perth Adelaide
 assignPackage 2 3
 viewPackageInfo 2
 
+registerPackage Sydney Brisbane 100 Nora Andonova 8475648576 n.nora@gmail.com
+
+RegisterPackage Brisbane AliceSprings 41999 Karina Eneva 0837564758 k.eneva@gmail.com
+
+RegisterPackage AliceSprings Sydney 50 Veselin Totev 0826473654 v.totev@gmail.com
+
+RegisterPackage Brisbane Perth 500 Alexander Daskalov 0845643754 a.das@gmail.com
+
+createRoute Feb 21 12:30 Perth Sydney Brisbane AliceSprings
+
+
+
+
+
 -----for bulk assign------
 registerPackage Sydney Brisbane 20.5 Jane Smith 0498237456 jane.smith@gmail.com
 registerPackage Sydney Brisbane 22.0 Michael Johnson 0412345678 michael.johnson@gmail.com
@@ -58,4 +72,11 @@ registerPackage Adelaide Brisbane 13.4 Ethan Jackson 0432109876 ethan.jackson@gm
 registerPackage AliceSprings Perth 29.2 Mia Thomas 0467890123 mia.thomas@gmail.com
 registerPackage Brisbane Darwin 13.5 Sophia Martinez 0423568970 sophia.martinez@gmail.com
 exit
+registerPackage Sydney Brisbane 100 Nora Andonova 8475648576 n.nora@gmail.com
+RegisterPackage Brisbane AliceSprings 41999 Karina Eneva 0837564758 k.eneva@gmail.com
+RegisterPackage AliceSprings Sydney 50 Veselin Totev 0826473654 v.totev@gmail.com
+RegisterPackage Brisbane Perth 500 Alexander Daskalov 0845643754 a.das@gmail.com
+viewUnassignedPackages
+createRoute Feb 21 12:30 Perth Sydney Brisbane AliceSprings
+
 """

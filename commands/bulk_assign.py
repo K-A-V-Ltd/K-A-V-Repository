@@ -7,7 +7,7 @@ class BulkAssignCommand(BaseCommand):
 
     def __init__(self, params: list[str], app_data: ApplicationData):
         super().__init__(params, app_data)
-        validate_minimum_params_count(params, 4, "BulkAssign")
+        validate_minimum_params_count(params, 3, "BulkAssign")
 
     def execute(self):
         route_id, *package_ids = self._params

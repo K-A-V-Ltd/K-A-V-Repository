@@ -38,3 +38,11 @@ class AssignPackageCommand(BaseCommand):
         self.app_data.unassigned_packages.remove(package)
 
         return f"Package #{package_id} successfully assigned to route #{route_id}."
+
+
+"""
+TO-DOs:
+-check if a package is not already assigned 
+-add a more thorough check that makes it impossible to assign a package that is not appropriate for a route (in case the employee was distracted and didn't put the right route ID)
+
+"""

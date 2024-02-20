@@ -51,5 +51,5 @@ class CreateRouteCommand(BaseCommand):
         self._app_data.add_route(route)
 
         return (
-            f"Route with ID: {route.id} and departure time: {departure_time} created."
+            f"Route #{route.id} created."
         )

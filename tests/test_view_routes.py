@@ -9,7 +9,9 @@ from models.route import Route
 
 
 class ViewRoutesCommandShould(unittest.TestCase):
-    def test_executePrintsAppropriateInformation_forEachRouteDependingOnRouteStatus_andTime(self):
+    def test_executePrintsAppropriateInformation_forEachRouteDependingOnRouteStatus_andTime(
+        self,
+    ):
         abstraction.my_current_time = datetime.strptime("Feb 24 12:00", "%b %d %H:%M")
         APP_DATA = ApplicationData()
         loc1 = Location("Brisbane")
@@ -28,26 +30,38 @@ class ViewRoutesCommandShould(unittest.TestCase):
         tst_route4 = Route(4, start4, [loc1, loc2, loc3, loc4, loc5])
         tst_route5 = Route(5, start5, [loc2, loc4, loc5, loc3, loc1])
         truck1, truck2, truck3, truck4, truck5 = Garage[:5]
-        tst_route1.truck, tst_route2.truck, tst_route3.truck, tst_route4.truck, tst_route5.truck = truck1, truck2, truck3, truck4, truck5
+        (
+            tst_route1.truck,
+            tst_route2.truck,
+            tst_route3.truck,
+            tst_route4.truck,
+            tst_route5.truck,
+        ) = (truck1, truck2, truck3, truck4, truck5)
         APP_DATA.add_route(tst_route1)
         APP_DATA.add_route(tst_route2)
         APP_DATA.add_route(tst_route3)
         APP_DATA.add_route(tst_route4)
         APP_DATA.add_route(tst_route5)
-        expected = "Route ID: 1\n" \
-                   "Brisbane (Mar 13 14:28) -> Perth (Mar 08 12:00) -> Sydney (Mar 13 04:02)\n" \
-                   "Delivery Weight: 0\n" \
-                   "Next Stop: Perth\n" \
-                   "\n" \
-                   "Route ID: 2\n" \
-                   "Perth (Mar 08 12:00) -> Sydney (Mar 13 04:02) -> Adelaide (Mar 09 20:00)\n" \
-                   "Delivery Weight: 0\n" \
-                   "Next Stop: Perth\n" \
-                   "\n" \
-                   "Route ID: 3\n" \
-                   "Sydney (Mar 13 04:02) -> Adelaide (Mar 09 20:00) -> Darwin (Mar 11 06:48)\n" \
-                   "Delivery Weight: 0\n" \
-                   "Next Stop: Adelaide\n" \
-                   "\n"
+        expected = (
+            "Route ID: 1\n"
+            "Brisbane (Mar 13 14:28) -> Perth (Mar 08 12:00) -> Sydney (Mar 13 04:02)\n"
+            "Delivery Weight: 0\n"
+            "Next Stop: Perth\n"
+            "\n"
+            "Route ID: 2\n"
+            "Perth (Mar 08 12:00) -> Sydney (Mar 13 04:02) -> Adelaide (Mar 09 20:00)\n"
+            "Delivery Weight: 0\n"
+            "Next Stop: Perth\n"
+            "\n"
+            "Route ID: 3\n"
+            "Sydney (Mar 13 04:02) -> Adelaide (Mar 09 20:00) -> Darwin (Mar 11 06:48)\n"
+            "Delivery Weight: 0\n"
+            "Next Stop: Adelaide\n"
+            "\n"
+        )
         tst_command = ViewActiveRoutesCommand([], APP_DATA)
         self.assertEqual(expected, tst_command.execute())
+
+
+# TO-Dos
+# have to fix this test, as it doesn't properly

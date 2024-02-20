@@ -48,3 +48,15 @@ class BulkAssignCommand(BaseCommand):
         )
 
         return assigned_str + "\n" + not_found_str
+
+
+"""
+TO-DOs:
+
+handle and check available weight capacity properly using this: 
+        if route.truck.weight_capacity < route.total_weight + package.weight:
+            return (
+                "The truck assigned to this route has already reached its max capacity."
+            )
+Add Unit Tests
+"""

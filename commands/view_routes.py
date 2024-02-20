@@ -9,6 +9,7 @@ class ViewActiveRoutesCommand(BaseCommand):
 
         for route in self.app_data.routes:
             if route.status == "in progress":
+                # it has use display_info() from class Route, as the str doesn't display correct and full information
                 formatted_routes += f"{str(route)}\nDelivery Weight: {route.delivery_weight}\nNext Stop: {route.next_stop.name}\n\n"
 
         if not formatted_routes:
